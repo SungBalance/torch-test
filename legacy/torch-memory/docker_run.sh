@@ -1,0 +1,1 @@
+sudo docker run --gpus=all -d -it --ipc=host --name torch-memory -v ${PWD}:/workspace/ mlsys.duckdns.org:9999/torch-memory:sk bash

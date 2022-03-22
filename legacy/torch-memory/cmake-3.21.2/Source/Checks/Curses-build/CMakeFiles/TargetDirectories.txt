@@ -1,0 +1,2 @@
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Source/Checks/Curses-build/CMakeFiles/rebuild_cache.dir
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Source/Checks/Curses-build/CMakeFiles/edit_cache.dir

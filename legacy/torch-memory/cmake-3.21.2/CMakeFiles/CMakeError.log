@@ -1,0 +1,3508 @@
+Determining if compiler supports needed C++17 constructs failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_1a093/fast && make  -f CMakeFiles/cmTC_1a093.dir/build.make CMakeFiles/cmTC_1a093.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_1a093.dir/cm_cxx17_check.cpp.o
+/usr/bin/g++   -std=gnu++1z -o CMakeFiles/cmTC_1a093.dir/cm_cxx17_check.cpp.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Source/Checks/cm_cxx17_check.cpp
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Source/Checks/cm_cxx17_check.cpp:4:20: fatal error: optional: No such file or directory
+compilation terminated.
+CMakeFiles/cmTC_1a093.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_1a093.dir/cm_cxx17_check.cpp.o' failed
+make[1]: *** [CMakeFiles/cmTC_1a093.dir/cm_cxx17_check.cpp.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_1a093/fast' failed
+make: *** [cmTC_1a093/fast] Error 2
+
+
+
+Determining if the environ exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_30c1c/fast && make  -f CMakeFiles/cmTC_30c1c.dir/build.make CMakeFiles/cmTC_30c1c.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_30c1c.dir/CheckSymbolExists.c.o
+/usr/bin/gcc   -std=gnu11 -o CMakeFiles/cmTC_30c1c.dir/CheckSymbolExists.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:19: error: ‘environ’ undeclared (first use in this function)
+   return ((int*)(&environ))[argc];
+                   ^
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:19: note: each undeclared identifier is reported only once for each function it appears in
+CMakeFiles/cmTC_30c1c.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_30c1c.dir/CheckSymbolExists.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_30c1c.dir/CheckSymbolExists.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_30c1c/fast' failed
+make: *** [cmTC_30c1c/fast] Error 2
+
+
+File /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdlib.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef environ
+  return ((int*)(&environ))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_34291/fast && make  -f CMakeFiles/cmTC_34291.dir/build.make CMakeFiles/cmTC_34291.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_34291.dir/src.c.o
+/usr/bin/gcc -DCMAKE_HAVE_LIBC_PTHREAD  -std=gnu11 -o CMakeFiles/cmTC_34291.dir/src.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_34291
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Bootstrap.cmk/cmake -E cmake_link_script CMakeFiles/cmTC_34291.dir/link.txt --verbose=1
+/usr/bin/gcc CMakeFiles/cmTC_34291.dir/src.c.o -o cmTC_34291 
+CMakeFiles/cmTC_34291.dir/src.c.o: In function `main':
+src.c:(.text+0x3c): undefined reference to `pthread_create'
+src.c:(.text+0x48): undefined reference to `pthread_detach'
+src.c:(.text+0x54): undefined reference to `pthread_cancel'
+src.c:(.text+0x65): undefined reference to `pthread_join'
+src.c:(.text+0x79): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_34291.dir/build.make:98: recipe for target 'cmTC_34291' failed
+make[1]: *** [cmTC_34291] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_34291/fast' failed
+make: *** [cmTC_34291/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+static void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_408f4/fast && make  -f CMakeFiles/cmTC_408f4.dir/build.make CMakeFiles/cmTC_408f4.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_408f4.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -DCHECK_FUNCTION_EXISTS=pthread_create -std=gnu11 -o CMakeFiles/cmTC_408f4.dir/CheckFunctionExists.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Modules/CheckFunctionExists.c
+Linking C executable cmTC_408f4
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Bootstrap.cmk/cmake -E cmake_link_script CMakeFiles/cmTC_408f4.dir/link.txt --verbose=1
+/usr/bin/gcc  -DCHECK_FUNCTION_EXISTS=pthread_create CMakeFiles/cmTC_408f4.dir/CheckFunctionExists.c.o -o cmTC_408f4  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_408f4.dir/build.make:98: recipe for target 'cmTC_408f4' failed
+make[1]: *** [cmTC_408f4] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_408f4/fast' failed
+make: *** [cmTC_408f4/fast] Error 2
+
+
+
+Checking whether CXX compiler has environ in stdlib.h failed to compile with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Source/kwsys/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_4e39e/fast && make  -f CMakeFiles/cmTC_4e39e.dir/build.make CMakeFiles/cmTC_4e39e.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Source/kwsys/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_4e39e.dir/kwsysPlatformTestsCXX.cxx.o
+/usr/bin/g++ -DTEST_KWSYS_CXX_HAS_ENVIRON_IN_STDLIB_H  -std=gnu++14 -o CMakeFiles/cmTC_4e39e.dir/kwsysPlatformTestsCXX.cxx.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Source/kwsys/kwsysPlatformTestsCXX.cxx
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Source/kwsys/kwsysPlatformTestsCXX.cxx: In function ‘int main()’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Source/kwsys/kwsysPlatformTestsCXX.cxx:53:13: error: ‘environ’ was not declared in this scope
+   char* e = environ[0];
+             ^
+CMakeFiles/cmTC_4e39e.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_4e39e.dir/kwsysPlatformTestsCXX.cxx.o' failed
+make[1]: *** [CMakeFiles/cmTC_4e39e.dir/kwsysPlatformTestsCXX.cxx.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Source/kwsys/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_4e39e/fast' failed
+make: *** [cmTC_4e39e/fast] Error 2
+
+
+
+Checking whether CXX compiler struct stat has st_mtimespec member failed to compile with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Source/kwsys/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_e4025/fast && make  -f CMakeFiles/cmTC_e4025.dir/build.make CMakeFiles/cmTC_e4025.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Source/kwsys/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_e4025.dir/kwsysPlatformTestsCXX.cxx.o
+/usr/bin/g++ -DTEST_KWSYS_CXX_STAT_HAS_ST_MTIMESPEC  -std=gnu++14 -o CMakeFiles/cmTC_e4025.dir/kwsysPlatformTestsCXX.cxx.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Source/kwsys/kwsysPlatformTestsCXX.cxx
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Source/kwsys/kwsysPlatformTestsCXX.cxx: In function ‘int main()’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Source/kwsys/kwsysPlatformTestsCXX.cxx:26:15: error: ‘struct stat’ has no member named ‘st_mtimespec’
+   (void)stat1.st_mtimespec.tv_sec;
+               ^
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Source/kwsys/kwsysPlatformTestsCXX.cxx:27:15: error: ‘struct stat’ has no member named ‘st_mtimespec’
+   (void)stat1.st_mtimespec.tv_nsec;
+               ^
+CMakeFiles/cmTC_e4025.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_e4025.dir/kwsysPlatformTestsCXX.cxx.o' failed
+make[1]: *** [CMakeFiles/cmTC_e4025.dir/kwsysPlatformTestsCXX.cxx.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Source/kwsys/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_e4025/fast' failed
+make: *** [cmTC_e4025/fast] Error 2
+
+
+
+Determining if the function connect exists in the socket;dl failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_fccf5/fast && make  -f CMakeFiles/cmTC_fccf5.dir/build.make CMakeFiles/cmTC_fccf5.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_fccf5.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -w -DCHECK_FUNCTION_EXISTS=connect -std=gnu11 -o CMakeFiles/cmTC_fccf5.dir/CheckFunctionExists.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Modules/CheckFunctionExists.c
+Linking C executable cmTC_fccf5
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Bootstrap.cmk/cmake -E cmake_link_script CMakeFiles/cmTC_fccf5.dir/link.txt --verbose=1
+/usr/bin/gcc  -w -DCHECK_FUNCTION_EXISTS=connect CMakeFiles/cmTC_fccf5.dir/CheckFunctionExists.c.o -o cmTC_fccf5  -lsocket -ldl 
+/usr/bin/ld: cannot find -lsocket
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_fccf5.dir/build.make:98: recipe for target 'cmTC_fccf5' failed
+make[1]: *** [cmTC_fccf5] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_fccf5/fast' failed
+make: *** [cmTC_fccf5/fast] Error 2
+
+
+
+Determining if the function recv exists in the network;dl failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_24746/fast && make  -f CMakeFiles/cmTC_24746.dir/build.make CMakeFiles/cmTC_24746.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_24746.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -w -DCHECK_FUNCTION_EXISTS=recv -std=gnu11 -o CMakeFiles/cmTC_24746.dir/CheckFunctionExists.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Modules/CheckFunctionExists.c
+Linking C executable cmTC_24746
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Bootstrap.cmk/cmake -E cmake_link_script CMakeFiles/cmTC_24746.dir/link.txt --verbose=1
+/usr/bin/gcc  -w -DCHECK_FUNCTION_EXISTS=recv CMakeFiles/cmTC_24746.dir/CheckFunctionExists.c.o -o cmTC_24746  -lnetwork -ldl 
+/usr/bin/ld: cannot find -lnetwork
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_24746.dir/build.make:98: recipe for target 'cmTC_24746' failed
+make[1]: *** [cmTC_24746] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_24746/fast' failed
+make: *** [cmTC_24746/fast] Error 2
+
+
+
+Determining if the RAND_status exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_c9e85/fast && make  -f CMakeFiles/cmTC_c9e85.dir/build.make CMakeFiles/cmTC_c9e85.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_c9e85.dir/CheckSymbolExists.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_c9e85.dir/CheckSymbolExists.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:7:19: error: ‘RAND_status’ undeclared (first use in this function)
+   return ((int*)(&RAND_status))[argc];
+                   ^
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:7:19: note: each undeclared identifier is reported only once for each function it appears in
+CMakeFiles/cmTC_c9e85.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_c9e85.dir/CheckSymbolExists.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_c9e85.dir/CheckSymbolExists.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_c9e85/fast' failed
+make: *** [cmTC_c9e85/fast] Error 2
+
+
+File /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef RAND_status
+  return ((int*)(&RAND_status))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the RAND_screen exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_11861/fast && make  -f CMakeFiles/cmTC_11861.dir/build.make CMakeFiles/cmTC_11861.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_11861.dir/CheckSymbolExists.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_11861.dir/CheckSymbolExists.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:7:19: error: ‘RAND_screen’ undeclared (first use in this function)
+   return ((int*)(&RAND_screen))[argc];
+                   ^
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:7:19: note: each undeclared identifier is reported only once for each function it appears in
+CMakeFiles/cmTC_11861.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_11861.dir/CheckSymbolExists.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_11861.dir/CheckSymbolExists.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_11861/fast' failed
+make: *** [cmTC_11861/fast] Error 2
+
+
+File /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef RAND_screen
+  return ((int*)(&RAND_screen))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the RAND_egd exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_c7397/fast && make  -f CMakeFiles/cmTC_c7397.dir/build.make CMakeFiles/cmTC_c7397.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_c7397.dir/CheckSymbolExists.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_c7397.dir/CheckSymbolExists.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:7:19: error: ‘RAND_egd’ undeclared (first use in this function)
+   return ((int*)(&RAND_egd))[argc];
+                   ^
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:7:19: note: each undeclared identifier is reported only once for each function it appears in
+CMakeFiles/cmTC_c7397.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_c7397.dir/CheckSymbolExists.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_c7397.dir/CheckSymbolExists.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_c7397/fast' failed
+make: *** [cmTC_c7397/fast] Error 2
+
+
+File /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef RAND_egd
+  return ((int*)(&RAND_egd))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the function dlopen exists in the dl;/usr/lib/x86_64-linux-gnu/libssl.so;/usr/lib/x86_64-linux-gnu/libcrypto.so;cmnghttp2 failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_99946/fast && make  -f CMakeFiles/cmTC_99946.dir/build.make CMakeFiles/cmTC_99946.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_99946.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -w -DCHECK_FUNCTION_EXISTS=dlopen -std=gnu11 -o CMakeFiles/cmTC_99946.dir/CheckFunctionExists.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Modules/CheckFunctionExists.c
+Linking C executable cmTC_99946
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Bootstrap.cmk/cmake -E cmake_link_script CMakeFiles/cmTC_99946.dir/link.txt --verbose=1
+/usr/bin/gcc  -w -DCHECK_FUNCTION_EXISTS=dlopen CMakeFiles/cmTC_99946.dir/CheckFunctionExists.c.o -o cmTC_99946  -ldl -lssl -lcrypto -lcmnghttp2 
+/usr/bin/ld: cannot find -lcmnghttp2
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_99946.dir/build.make:100: recipe for target 'cmTC_99946' failed
+make[1]: *** [cmTC_99946] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_99946/fast' failed
+make: *** [cmTC_99946/fast] Error 2
+
+
+
+Determining if files stdio.h;inttypes.h;sys/filio.h exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_ddb98/fast && make  -f CMakeFiles/cmTC_ddb98.dir/build.make CMakeFiles/cmTC_ddb98.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_ddb98.dir/HAVE_SYS_FILIO_H.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_ddb98.dir/HAVE_SYS_FILIO_H.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_SYS_FILIO_H.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_SYS_FILIO_H.c:4:23: fatal error: sys/filio.h: No such file or directory
+compilation terminated.
+CMakeFiles/cmTC_ddb98.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_ddb98.dir/HAVE_SYS_FILIO_H.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_ddb98.dir/HAVE_SYS_FILIO_H.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_ddb98/fast' failed
+make: *** [cmTC_ddb98/fast] Error 2
+
+
+Source:
+/* */
+#include <stdio.h>
+#include <inttypes.h>
+#include <sys/filio.h>
+
+
+int main(void){return 0;}
+
+Determining if files stdio.h;inttypes.h;sys/ioctl.h;sys/param.h;sys/poll.h;sys/resource.h;sys/select.h;sys/socket.h;sys/sockio.h exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_f11a2/fast && make  -f CMakeFiles/cmTC_f11a2.dir/build.make CMakeFiles/cmTC_f11a2.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_f11a2.dir/HAVE_SYS_SOCKIO_H.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_f11a2.dir/HAVE_SYS_SOCKIO_H.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_SYS_SOCKIO_H.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_SYS_SOCKIO_H.c:10:24: fatal error: sys/sockio.h: No such file or directory
+compilation terminated.
+CMakeFiles/cmTC_f11a2.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_f11a2.dir/HAVE_SYS_SOCKIO_H.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_f11a2.dir/HAVE_SYS_SOCKIO_H.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_f11a2/fast' failed
+make: *** [cmTC_f11a2/fast] Error 2
+
+
+Source:
+/* */
+#include <stdio.h>
+#include <inttypes.h>
+#include <sys/ioctl.h>
+#include <sys/param.h>
+#include <sys/poll.h>
+#include <sys/resource.h>
+#include <sys/select.h>
+#include <sys/socket.h>
+#include <sys/sockio.h>
+
+
+int main(void){return 0;}
+
+Determining if files stdio.h;inttypes.h;sys/ioctl.h;sys/param.h;sys/poll.h;sys/resource.h;sys/select.h;sys/socket.h;sys/stat.h;sys/time.h;sys/types.h;sys/uio.h;sys/un.h;sys/utime.h exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_279b2/fast && make  -f CMakeFiles/cmTC_279b2.dir/build.make CMakeFiles/cmTC_279b2.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_279b2.dir/HAVE_SYS_UTIME_H.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_279b2.dir/HAVE_SYS_UTIME_H.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_SYS_UTIME_H.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_SYS_UTIME_H.c:15:23: fatal error: sys/utime.h: No such file or directory
+compilation terminated.
+CMakeFiles/cmTC_279b2.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_279b2.dir/HAVE_SYS_UTIME_H.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_279b2.dir/HAVE_SYS_UTIME_H.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_279b2/fast' failed
+make: *** [cmTC_279b2/fast] Error 2
+
+
+Source:
+/* */
+#include <stdio.h>
+#include <inttypes.h>
+#include <sys/ioctl.h>
+#include <sys/param.h>
+#include <sys/poll.h>
+#include <sys/resource.h>
+#include <sys/select.h>
+#include <sys/socket.h>
+#include <sys/stat.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <sys/uio.h>
+#include <sys/un.h>
+#include <sys/utime.h>
+
+
+int main(void){return 0;}
+
+Determining if files stdio.h;inttypes.h;sys/ioctl.h;sys/param.h;sys/poll.h;sys/resource.h;sys/select.h;sys/socket.h;sys/stat.h;sys/time.h;sys/types.h;sys/uio.h;sys/un.h;sys/xattr.h;alloca.h;arpa/inet.h;arpa/tftp.h;assert.h;crypto.h exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_4115d/fast && make  -f CMakeFiles/cmTC_4115d.dir/build.make CMakeFiles/cmTC_4115d.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_4115d.dir/HAVE_CRYPTO_H.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_4115d.dir/HAVE_CRYPTO_H.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_CRYPTO_H.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_CRYPTO_H.c:20:20: fatal error: crypto.h: No such file or directory
+compilation terminated.
+CMakeFiles/cmTC_4115d.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_4115d.dir/HAVE_CRYPTO_H.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_4115d.dir/HAVE_CRYPTO_H.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_4115d/fast' failed
+make: *** [cmTC_4115d/fast] Error 2
+
+
+Source:
+/* */
+#include <stdio.h>
+#include <inttypes.h>
+#include <sys/ioctl.h>
+#include <sys/param.h>
+#include <sys/poll.h>
+#include <sys/resource.h>
+#include <sys/select.h>
+#include <sys/socket.h>
+#include <sys/stat.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <sys/uio.h>
+#include <sys/un.h>
+#include <sys/xattr.h>
+#include <alloca.h>
+#include <arpa/inet.h>
+#include <arpa/tftp.h>
+#include <assert.h>
+#include <crypto.h>
+
+
+int main(void){return 0;}
+
+Determining if files stdio.h;inttypes.h;sys/ioctl.h;sys/param.h;sys/poll.h;sys/resource.h;sys/select.h;sys/socket.h;sys/stat.h;sys/time.h;sys/types.h;sys/uio.h;sys/un.h;sys/xattr.h;alloca.h;arpa/inet.h;arpa/tftp.h;assert.h;err.h;errno.h;fcntl.h;idn2.h exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_990ee/fast && make  -f CMakeFiles/cmTC_990ee.dir/build.make CMakeFiles/cmTC_990ee.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_990ee.dir/HAVE_IDN2_H.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_990ee.dir/HAVE_IDN2_H.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_IDN2_H.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_IDN2_H.c:23:18: fatal error: idn2.h: No such file or directory
+compilation terminated.
+CMakeFiles/cmTC_990ee.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_990ee.dir/HAVE_IDN2_H.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_990ee.dir/HAVE_IDN2_H.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_990ee/fast' failed
+make: *** [cmTC_990ee/fast] Error 2
+
+
+Source:
+/* */
+#include <stdio.h>
+#include <inttypes.h>
+#include <sys/ioctl.h>
+#include <sys/param.h>
+#include <sys/poll.h>
+#include <sys/resource.h>
+#include <sys/select.h>
+#include <sys/socket.h>
+#include <sys/stat.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <sys/uio.h>
+#include <sys/un.h>
+#include <sys/xattr.h>
+#include <alloca.h>
+#include <arpa/inet.h>
+#include <arpa/tftp.h>
+#include <assert.h>
+#include <err.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <idn2.h>
+
+
+int main(void){return 0;}
+
+Determining if files stdio.h;inttypes.h;sys/ioctl.h;sys/param.h;sys/poll.h;sys/resource.h;sys/select.h;sys/socket.h;sys/stat.h;sys/time.h;sys/types.h;sys/uio.h;sys/un.h;sys/xattr.h;alloca.h;arpa/inet.h;arpa/tftp.h;assert.h;err.h;errno.h;fcntl.h;ifaddrs.h;io.h exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_09115/fast && make  -f CMakeFiles/cmTC_09115.dir/build.make CMakeFiles/cmTC_09115.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_09115.dir/HAVE_IO_H.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_09115.dir/HAVE_IO_H.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_IO_H.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_IO_H.c:24:16: fatal error: io.h: No such file or directory
+compilation terminated.
+CMakeFiles/cmTC_09115.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_09115.dir/HAVE_IO_H.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_09115.dir/HAVE_IO_H.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_09115/fast' failed
+make: *** [cmTC_09115/fast] Error 2
+
+
+Source:
+/* */
+#include <stdio.h>
+#include <inttypes.h>
+#include <sys/ioctl.h>
+#include <sys/param.h>
+#include <sys/poll.h>
+#include <sys/resource.h>
+#include <sys/select.h>
+#include <sys/socket.h>
+#include <sys/stat.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <sys/uio.h>
+#include <sys/un.h>
+#include <sys/xattr.h>
+#include <alloca.h>
+#include <arpa/inet.h>
+#include <arpa/tftp.h>
+#include <assert.h>
+#include <err.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <ifaddrs.h>
+#include <io.h>
+
+
+int main(void){return 0;}
+
+Determining if files stdio.h;inttypes.h;sys/ioctl.h;sys/param.h;sys/poll.h;sys/resource.h;sys/select.h;sys/socket.h;sys/stat.h;sys/time.h;sys/types.h;sys/uio.h;sys/un.h;sys/xattr.h;alloca.h;arpa/inet.h;arpa/tftp.h;assert.h;err.h;errno.h;fcntl.h;ifaddrs.h;krb.h exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_0ddba/fast && make  -f CMakeFiles/cmTC_0ddba.dir/build.make CMakeFiles/cmTC_0ddba.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_0ddba.dir/HAVE_KRB_H.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_0ddba.dir/HAVE_KRB_H.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_KRB_H.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_KRB_H.c:24:17: fatal error: krb.h: No such file or directory
+compilation terminated.
+CMakeFiles/cmTC_0ddba.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_0ddba.dir/HAVE_KRB_H.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_0ddba.dir/HAVE_KRB_H.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_0ddba/fast' failed
+make: *** [cmTC_0ddba/fast] Error 2
+
+
+Source:
+/* */
+#include <stdio.h>
+#include <inttypes.h>
+#include <sys/ioctl.h>
+#include <sys/param.h>
+#include <sys/poll.h>
+#include <sys/resource.h>
+#include <sys/select.h>
+#include <sys/socket.h>
+#include <sys/stat.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <sys/uio.h>
+#include <sys/un.h>
+#include <sys/xattr.h>
+#include <alloca.h>
+#include <arpa/inet.h>
+#include <arpa/tftp.h>
+#include <assert.h>
+#include <err.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <ifaddrs.h>
+#include <krb.h>
+
+
+int main(void){return 0;}
+
+Determining if files stdio.h;inttypes.h;sys/ioctl.h;sys/param.h;sys/poll.h;sys/resource.h;sys/select.h;sys/socket.h;sys/stat.h;sys/time.h;sys/types.h;sys/uio.h;sys/un.h;sys/xattr.h;alloca.h;arpa/inet.h;arpa/tftp.h;assert.h;err.h;errno.h;fcntl.h;ifaddrs.h;libgen.h;locale.h;net/if.h;netdb.h;netinet/in.h;netinet/tcp.h;pem.h exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_0c57d/fast && make  -f CMakeFiles/cmTC_0c57d.dir/build.make CMakeFiles/cmTC_0c57d.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_0c57d.dir/HAVE_PEM_H.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_0c57d.dir/HAVE_PEM_H.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_PEM_H.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_PEM_H.c:30:17: fatal error: pem.h: No such file or directory
+compilation terminated.
+CMakeFiles/cmTC_0c57d.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_0c57d.dir/HAVE_PEM_H.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_0c57d.dir/HAVE_PEM_H.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_0c57d/fast' failed
+make: *** [cmTC_0c57d/fast] Error 2
+
+
+Source:
+/* */
+#include <stdio.h>
+#include <inttypes.h>
+#include <sys/ioctl.h>
+#include <sys/param.h>
+#include <sys/poll.h>
+#include <sys/resource.h>
+#include <sys/select.h>
+#include <sys/socket.h>
+#include <sys/stat.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <sys/uio.h>
+#include <sys/un.h>
+#include <sys/xattr.h>
+#include <alloca.h>
+#include <arpa/inet.h>
+#include <arpa/tftp.h>
+#include <assert.h>
+#include <err.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <ifaddrs.h>
+#include <libgen.h>
+#include <locale.h>
+#include <net/if.h>
+#include <netdb.h>
+#include <netinet/in.h>
+#include <netinet/tcp.h>
+#include <pem.h>
+
+
+int main(void){return 0;}
+
+Determining if files stdio.h;inttypes.h;sys/ioctl.h;sys/param.h;sys/poll.h;sys/resource.h;sys/select.h;sys/socket.h;sys/stat.h;sys/time.h;sys/types.h;sys/uio.h;sys/un.h;sys/xattr.h;alloca.h;arpa/inet.h;arpa/tftp.h;assert.h;err.h;errno.h;fcntl.h;ifaddrs.h;libgen.h;locale.h;net/if.h;netdb.h;netinet/in.h;netinet/tcp.h;poll.h;pwd.h;rsa.h exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_33960/fast && make  -f CMakeFiles/cmTC_33960.dir/build.make CMakeFiles/cmTC_33960.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_33960.dir/HAVE_RSA_H.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_33960.dir/HAVE_RSA_H.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_RSA_H.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_RSA_H.c:32:17: fatal error: rsa.h: No such file or directory
+compilation terminated.
+CMakeFiles/cmTC_33960.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_33960.dir/HAVE_RSA_H.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_33960.dir/HAVE_RSA_H.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_33960/fast' failed
+make: *** [cmTC_33960/fast] Error 2
+
+
+Source:
+/* */
+#include <stdio.h>
+#include <inttypes.h>
+#include <sys/ioctl.h>
+#include <sys/param.h>
+#include <sys/poll.h>
+#include <sys/resource.h>
+#include <sys/select.h>
+#include <sys/socket.h>
+#include <sys/stat.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <sys/uio.h>
+#include <sys/un.h>
+#include <sys/xattr.h>
+#include <alloca.h>
+#include <arpa/inet.h>
+#include <arpa/tftp.h>
+#include <assert.h>
+#include <err.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <ifaddrs.h>
+#include <libgen.h>
+#include <locale.h>
+#include <net/if.h>
+#include <netdb.h>
+#include <netinet/in.h>
+#include <netinet/tcp.h>
+#include <poll.h>
+#include <pwd.h>
+#include <rsa.h>
+
+
+int main(void){return 0;}
+
+Determining if files stdio.h;inttypes.h;sys/ioctl.h;sys/param.h;sys/poll.h;sys/resource.h;sys/select.h;sys/socket.h;sys/stat.h;sys/time.h;sys/types.h;sys/uio.h;sys/un.h;sys/xattr.h;alloca.h;arpa/inet.h;arpa/tftp.h;assert.h;err.h;errno.h;fcntl.h;ifaddrs.h;libgen.h;locale.h;net/if.h;netdb.h;netinet/in.h;netinet/tcp.h;poll.h;pwd.h;setjmp.h;sgtty.h;signal.h;ssl.h exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_1b5b1/fast && make  -f CMakeFiles/cmTC_1b5b1.dir/build.make CMakeFiles/cmTC_1b5b1.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_1b5b1.dir/HAVE_SSL_H.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_1b5b1.dir/HAVE_SSL_H.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_SSL_H.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_SSL_H.c:35:17: fatal error: ssl.h: No such file or directory
+compilation terminated.
+CMakeFiles/cmTC_1b5b1.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_1b5b1.dir/HAVE_SSL_H.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_1b5b1.dir/HAVE_SSL_H.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_1b5b1/fast' failed
+make: *** [cmTC_1b5b1/fast] Error 2
+
+
+Source:
+/* */
+#include <stdio.h>
+#include <inttypes.h>
+#include <sys/ioctl.h>
+#include <sys/param.h>
+#include <sys/poll.h>
+#include <sys/resource.h>
+#include <sys/select.h>
+#include <sys/socket.h>
+#include <sys/stat.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <sys/uio.h>
+#include <sys/un.h>
+#include <sys/xattr.h>
+#include <alloca.h>
+#include <arpa/inet.h>
+#include <arpa/tftp.h>
+#include <assert.h>
+#include <err.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <ifaddrs.h>
+#include <libgen.h>
+#include <locale.h>
+#include <net/if.h>
+#include <netdb.h>
+#include <netinet/in.h>
+#include <netinet/tcp.h>
+#include <poll.h>
+#include <pwd.h>
+#include <setjmp.h>
+#include <sgtty.h>
+#include <signal.h>
+#include <ssl.h>
+
+
+int main(void){return 0;}
+
+Determining if files stdio.h;inttypes.h;sys/ioctl.h;sys/param.h;sys/poll.h;sys/resource.h;sys/select.h;sys/socket.h;sys/stat.h;sys/time.h;sys/types.h;sys/uio.h;sys/un.h;sys/xattr.h;alloca.h;arpa/inet.h;arpa/tftp.h;assert.h;err.h;errno.h;fcntl.h;ifaddrs.h;libgen.h;locale.h;net/if.h;netdb.h;netinet/in.h;netinet/tcp.h;poll.h;pwd.h;setjmp.h;sgtty.h;signal.h;stdbool.h;stdint.h;stdio.h;stdlib.h;string.h;strings.h;stropts.h;termio.h;termios.h;time.h;unistd.h;utime.h;x509.h exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_a685b/fast && make  -f CMakeFiles/cmTC_a685b.dir/build.make CMakeFiles/cmTC_a685b.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_a685b.dir/HAVE_X509_H.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_a685b.dir/HAVE_X509_H.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_X509_H.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_X509_H.c:47:18: fatal error: x509.h: No such file or directory
+compilation terminated.
+CMakeFiles/cmTC_a685b.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_a685b.dir/HAVE_X509_H.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_a685b.dir/HAVE_X509_H.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_a685b/fast' failed
+make: *** [cmTC_a685b/fast] Error 2
+
+
+Source:
+/* */
+#include <stdio.h>
+#include <inttypes.h>
+#include <sys/ioctl.h>
+#include <sys/param.h>
+#include <sys/poll.h>
+#include <sys/resource.h>
+#include <sys/select.h>
+#include <sys/socket.h>
+#include <sys/stat.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <sys/uio.h>
+#include <sys/un.h>
+#include <sys/xattr.h>
+#include <alloca.h>
+#include <arpa/inet.h>
+#include <arpa/tftp.h>
+#include <assert.h>
+#include <err.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <ifaddrs.h>
+#include <libgen.h>
+#include <locale.h>
+#include <net/if.h>
+#include <netdb.h>
+#include <netinet/in.h>
+#include <netinet/tcp.h>
+#include <poll.h>
+#include <pwd.h>
+#include <setjmp.h>
+#include <sgtty.h>
+#include <signal.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <strings.h>
+#include <stropts.h>
+#include <termio.h>
+#include <termios.h>
+#include <time.h>
+#include <unistd.h>
+#include <utime.h>
+#include <x509.h>
+
+
+int main(void){return 0;}
+
+Determining if files stdio.h;inttypes.h;sys/ioctl.h;sys/param.h;sys/poll.h;sys/resource.h;sys/select.h;sys/socket.h;sys/stat.h;sys/time.h;sys/types.h;sys/uio.h;sys/un.h;sys/xattr.h;alloca.h;arpa/inet.h;arpa/tftp.h;assert.h;err.h;errno.h;fcntl.h;ifaddrs.h;libgen.h;locale.h;net/if.h;netdb.h;netinet/in.h;netinet/tcp.h;poll.h;pwd.h;setjmp.h;sgtty.h;signal.h;stdbool.h;stdint.h;stdio.h;stdlib.h;string.h;strings.h;stropts.h;termio.h;termios.h;time.h;unistd.h;utime.h;process.h exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_1ad02/fast && make  -f CMakeFiles/cmTC_1ad02.dir/build.make CMakeFiles/cmTC_1ad02.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_1ad02.dir/HAVE_PROCESS_H.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_1ad02.dir/HAVE_PROCESS_H.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_PROCESS_H.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_PROCESS_H.c:47:21: fatal error: process.h: No such file or directory
+compilation terminated.
+CMakeFiles/cmTC_1ad02.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_1ad02.dir/HAVE_PROCESS_H.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_1ad02.dir/HAVE_PROCESS_H.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_1ad02/fast' failed
+make: *** [cmTC_1ad02/fast] Error 2
+
+
+Source:
+/* */
+#include <stdio.h>
+#include <inttypes.h>
+#include <sys/ioctl.h>
+#include <sys/param.h>
+#include <sys/poll.h>
+#include <sys/resource.h>
+#include <sys/select.h>
+#include <sys/socket.h>
+#include <sys/stat.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <sys/uio.h>
+#include <sys/un.h>
+#include <sys/xattr.h>
+#include <alloca.h>
+#include <arpa/inet.h>
+#include <arpa/tftp.h>
+#include <assert.h>
+#include <err.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <ifaddrs.h>
+#include <libgen.h>
+#include <locale.h>
+#include <net/if.h>
+#include <netdb.h>
+#include <netinet/in.h>
+#include <netinet/tcp.h>
+#include <poll.h>
+#include <pwd.h>
+#include <setjmp.h>
+#include <sgtty.h>
+#include <signal.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <strings.h>
+#include <stropts.h>
+#include <termio.h>
+#include <termios.h>
+#include <time.h>
+#include <unistd.h>
+#include <utime.h>
+#include <process.h>
+
+
+int main(void){return 0;}
+
+Determining if files stdio.h;inttypes.h;sys/ioctl.h;sys/param.h;sys/poll.h;sys/resource.h;sys/select.h;sys/socket.h;sys/stat.h;sys/time.h;sys/types.h;sys/uio.h;sys/un.h;sys/xattr.h;alloca.h;arpa/inet.h;arpa/tftp.h;assert.h;err.h;errno.h;fcntl.h;ifaddrs.h;libgen.h;locale.h;net/if.h;netdb.h;netinet/in.h;netinet/tcp.h;poll.h;pwd.h;setjmp.h;sgtty.h;signal.h;stdbool.h;stdint.h;stdio.h;stdlib.h;string.h;strings.h;stropts.h;termio.h;termios.h;time.h;unistd.h;utime.h;stddef.h;dlfcn.h;malloc.h;memory.h;netinet/if_ether.h;stdint.h;sockio.h exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_eaba1/fast && make  -f CMakeFiles/cmTC_eaba1.dir/build.make CMakeFiles/cmTC_eaba1.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_eaba1.dir/HAVE_SOCKIO_H.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_eaba1.dir/HAVE_SOCKIO_H.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_SOCKIO_H.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_SOCKIO_H.c:53:20: fatal error: sockio.h: No such file or directory
+compilation terminated.
+CMakeFiles/cmTC_eaba1.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_eaba1.dir/HAVE_SOCKIO_H.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_eaba1.dir/HAVE_SOCKIO_H.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_eaba1/fast' failed
+make: *** [cmTC_eaba1/fast] Error 2
+
+
+Source:
+/* */
+#include <stdio.h>
+#include <inttypes.h>
+#include <sys/ioctl.h>
+#include <sys/param.h>
+#include <sys/poll.h>
+#include <sys/resource.h>
+#include <sys/select.h>
+#include <sys/socket.h>
+#include <sys/stat.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <sys/uio.h>
+#include <sys/un.h>
+#include <sys/xattr.h>
+#include <alloca.h>
+#include <arpa/inet.h>
+#include <arpa/tftp.h>
+#include <assert.h>
+#include <err.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <ifaddrs.h>
+#include <libgen.h>
+#include <locale.h>
+#include <net/if.h>
+#include <netdb.h>
+#include <netinet/in.h>
+#include <netinet/tcp.h>
+#include <poll.h>
+#include <pwd.h>
+#include <setjmp.h>
+#include <sgtty.h>
+#include <signal.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <strings.h>
+#include <stropts.h>
+#include <termio.h>
+#include <termios.h>
+#include <time.h>
+#include <unistd.h>
+#include <utime.h>
+#include <stddef.h>
+#include <dlfcn.h>
+#include <malloc.h>
+#include <memory.h>
+#include <netinet/if_ether.h>
+#include <stdint.h>
+#include <sockio.h>
+
+
+int main(void){return 0;}
+
+Determining if the stricmp exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_b17bd/fast && make  -f CMakeFiles/cmTC_b17bd.dir/build.make CMakeFiles/cmTC_b17bd.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_b17bd.dir/CheckSymbolExists.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_b17bd.dir/CheckSymbolExists.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:59:19: error: ‘stricmp’ undeclared (first use in this function)
+   return ((int*)(&stricmp))[argc];
+                   ^
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:59:19: note: each undeclared identifier is reported only once for each function it appears in
+CMakeFiles/cmTC_b17bd.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_b17bd.dir/CheckSymbolExists.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_b17bd.dir/CheckSymbolExists.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_b17bd/fast' failed
+make: *** [cmTC_b17bd/fast] Error 2
+
+
+File /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdio.h>
+#include <inttypes.h>
+#include <sys/ioctl.h>
+#include <sys/param.h>
+#include <sys/poll.h>
+#include <sys/resource.h>
+#include <sys/select.h>
+#include <sys/socket.h>
+#include <sys/stat.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <sys/uio.h>
+#include <sys/un.h>
+#include <sys/xattr.h>
+#include <alloca.h>
+#include <arpa/inet.h>
+#include <arpa/tftp.h>
+#include <assert.h>
+#include <err.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <ifaddrs.h>
+#include <libgen.h>
+#include <locale.h>
+#include <net/if.h>
+#include <netdb.h>
+#include <netinet/in.h>
+#include <netinet/tcp.h>
+#include <poll.h>
+#include <pwd.h>
+#include <setjmp.h>
+#include <sgtty.h>
+#include <signal.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <strings.h>
+#include <stropts.h>
+#include <termio.h>
+#include <termios.h>
+#include <time.h>
+#include <unistd.h>
+#include <utime.h>
+#include <stddef.h>
+#include <dlfcn.h>
+#include <malloc.h>
+#include <memory.h>
+#include <netinet/if_ether.h>
+#include <stdint.h>
+#include <sys/utsname.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef stricmp
+  return ((int*)(&stricmp))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the strcmpi exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_60cd7/fast && make  -f CMakeFiles/cmTC_60cd7.dir/build.make CMakeFiles/cmTC_60cd7.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_60cd7.dir/CheckSymbolExists.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_60cd7.dir/CheckSymbolExists.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:59:19: error: ‘strcmpi’ undeclared (first use in this function)
+   return ((int*)(&strcmpi))[argc];
+                   ^
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:59:19: note: each undeclared identifier is reported only once for each function it appears in
+CMakeFiles/cmTC_60cd7.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_60cd7.dir/CheckSymbolExists.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_60cd7.dir/CheckSymbolExists.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_60cd7/fast' failed
+make: *** [cmTC_60cd7/fast] Error 2
+
+
+File /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdio.h>
+#include <inttypes.h>
+#include <sys/ioctl.h>
+#include <sys/param.h>
+#include <sys/poll.h>
+#include <sys/resource.h>
+#include <sys/select.h>
+#include <sys/socket.h>
+#include <sys/stat.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <sys/uio.h>
+#include <sys/un.h>
+#include <sys/xattr.h>
+#include <alloca.h>
+#include <arpa/inet.h>
+#include <arpa/tftp.h>
+#include <assert.h>
+#include <err.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <ifaddrs.h>
+#include <libgen.h>
+#include <locale.h>
+#include <net/if.h>
+#include <netdb.h>
+#include <netinet/in.h>
+#include <netinet/tcp.h>
+#include <poll.h>
+#include <pwd.h>
+#include <setjmp.h>
+#include <sgtty.h>
+#include <signal.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <strings.h>
+#include <stropts.h>
+#include <termio.h>
+#include <termios.h>
+#include <time.h>
+#include <unistd.h>
+#include <utime.h>
+#include <stddef.h>
+#include <dlfcn.h>
+#include <malloc.h>
+#include <memory.h>
+#include <netinet/if_ether.h>
+#include <stdint.h>
+#include <sys/utsname.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef strcmpi
+  return ((int*)(&strcmpi))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the strncmpi exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_a4cad/fast && make  -f CMakeFiles/cmTC_a4cad.dir/build.make CMakeFiles/cmTC_a4cad.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_a4cad.dir/CheckSymbolExists.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_a4cad.dir/CheckSymbolExists.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:59:19: error: ‘strncmpi’ undeclared (first use in this function)
+   return ((int*)(&strncmpi))[argc];
+                   ^
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:59:19: note: each undeclared identifier is reported only once for each function it appears in
+CMakeFiles/cmTC_a4cad.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_a4cad.dir/CheckSymbolExists.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_a4cad.dir/CheckSymbolExists.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_a4cad/fast' failed
+make: *** [cmTC_a4cad/fast] Error 2
+
+
+File /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdio.h>
+#include <inttypes.h>
+#include <sys/ioctl.h>
+#include <sys/param.h>
+#include <sys/poll.h>
+#include <sys/resource.h>
+#include <sys/select.h>
+#include <sys/socket.h>
+#include <sys/stat.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <sys/uio.h>
+#include <sys/un.h>
+#include <sys/xattr.h>
+#include <alloca.h>
+#include <arpa/inet.h>
+#include <arpa/tftp.h>
+#include <assert.h>
+#include <err.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <ifaddrs.h>
+#include <libgen.h>
+#include <locale.h>
+#include <net/if.h>
+#include <netdb.h>
+#include <netinet/in.h>
+#include <netinet/tcp.h>
+#include <poll.h>
+#include <pwd.h>
+#include <setjmp.h>
+#include <sgtty.h>
+#include <signal.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <strings.h>
+#include <stropts.h>
+#include <termio.h>
+#include <termios.h>
+#include <time.h>
+#include <unistd.h>
+#include <utime.h>
+#include <stddef.h>
+#include <dlfcn.h>
+#include <malloc.h>
+#include <memory.h>
+#include <netinet/if_ether.h>
+#include <stdint.h>
+#include <sys/utsname.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef strncmpi
+  return ((int*)(&strncmpi))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the inet_ntoa_r exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_6e8d6/fast && make  -f CMakeFiles/cmTC_6e8d6.dir/build.make CMakeFiles/cmTC_6e8d6.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_6e8d6.dir/CheckSymbolExists.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_6e8d6.dir/CheckSymbolExists.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:59:19: error: ‘inet_ntoa_r’ undeclared (first use in this function)
+   return ((int*)(&inet_ntoa_r))[argc];
+                   ^
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:59:19: note: each undeclared identifier is reported only once for each function it appears in
+CMakeFiles/cmTC_6e8d6.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_6e8d6.dir/CheckSymbolExists.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_6e8d6.dir/CheckSymbolExists.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_6e8d6/fast' failed
+make: *** [cmTC_6e8d6/fast] Error 2
+
+
+File /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdio.h>
+#include <inttypes.h>
+#include <sys/ioctl.h>
+#include <sys/param.h>
+#include <sys/poll.h>
+#include <sys/resource.h>
+#include <sys/select.h>
+#include <sys/socket.h>
+#include <sys/stat.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <sys/uio.h>
+#include <sys/un.h>
+#include <sys/xattr.h>
+#include <alloca.h>
+#include <arpa/inet.h>
+#include <arpa/tftp.h>
+#include <assert.h>
+#include <err.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <ifaddrs.h>
+#include <libgen.h>
+#include <locale.h>
+#include <net/if.h>
+#include <netdb.h>
+#include <netinet/in.h>
+#include <netinet/tcp.h>
+#include <poll.h>
+#include <pwd.h>
+#include <setjmp.h>
+#include <sgtty.h>
+#include <signal.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <strings.h>
+#include <stropts.h>
+#include <termio.h>
+#include <termios.h>
+#include <time.h>
+#include <unistd.h>
+#include <utime.h>
+#include <stddef.h>
+#include <dlfcn.h>
+#include <malloc.h>
+#include <memory.h>
+#include <netinet/if_ether.h>
+#include <stdint.h>
+#include <sys/utsname.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef inet_ntoa_r
+  return ((int*)(&inet_ntoa_r))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the closesocket exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_488d0/fast && make  -f CMakeFiles/cmTC_488d0.dir/build.make CMakeFiles/cmTC_488d0.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_488d0.dir/CheckSymbolExists.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_488d0.dir/CheckSymbolExists.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:59:19: error: ‘closesocket’ undeclared (first use in this function)
+   return ((int*)(&closesocket))[argc];
+                   ^
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:59:19: note: each undeclared identifier is reported only once for each function it appears in
+CMakeFiles/cmTC_488d0.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_488d0.dir/CheckSymbolExists.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_488d0.dir/CheckSymbolExists.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_488d0/fast' failed
+make: *** [cmTC_488d0/fast] Error 2
+
+
+File /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdio.h>
+#include <inttypes.h>
+#include <sys/ioctl.h>
+#include <sys/param.h>
+#include <sys/poll.h>
+#include <sys/resource.h>
+#include <sys/select.h>
+#include <sys/socket.h>
+#include <sys/stat.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <sys/uio.h>
+#include <sys/un.h>
+#include <sys/xattr.h>
+#include <alloca.h>
+#include <arpa/inet.h>
+#include <arpa/tftp.h>
+#include <assert.h>
+#include <err.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <ifaddrs.h>
+#include <libgen.h>
+#include <locale.h>
+#include <net/if.h>
+#include <netdb.h>
+#include <netinet/in.h>
+#include <netinet/tcp.h>
+#include <poll.h>
+#include <pwd.h>
+#include <setjmp.h>
+#include <sgtty.h>
+#include <signal.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <strings.h>
+#include <stropts.h>
+#include <termio.h>
+#include <termios.h>
+#include <time.h>
+#include <unistd.h>
+#include <utime.h>
+#include <stddef.h>
+#include <dlfcn.h>
+#include <malloc.h>
+#include <memory.h>
+#include <netinet/if_ether.h>
+#include <stdint.h>
+#include <sys/utsname.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef closesocket
+  return ((int*)(&closesocket))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the getpass_r exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_97097/fast && make  -f CMakeFiles/cmTC_97097.dir/build.make CMakeFiles/cmTC_97097.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_97097.dir/CheckSymbolExists.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_97097.dir/CheckSymbolExists.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:59:19: error: ‘getpass_r’ undeclared (first use in this function)
+   return ((int*)(&getpass_r))[argc];
+                   ^
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:59:19: note: each undeclared identifier is reported only once for each function it appears in
+CMakeFiles/cmTC_97097.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_97097.dir/CheckSymbolExists.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_97097.dir/CheckSymbolExists.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_97097/fast' failed
+make: *** [cmTC_97097/fast] Error 2
+
+
+File /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdio.h>
+#include <inttypes.h>
+#include <sys/ioctl.h>
+#include <sys/param.h>
+#include <sys/poll.h>
+#include <sys/resource.h>
+#include <sys/select.h>
+#include <sys/socket.h>
+#include <sys/stat.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <sys/uio.h>
+#include <sys/un.h>
+#include <sys/xattr.h>
+#include <alloca.h>
+#include <arpa/inet.h>
+#include <arpa/tftp.h>
+#include <assert.h>
+#include <err.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <ifaddrs.h>
+#include <libgen.h>
+#include <locale.h>
+#include <net/if.h>
+#include <netdb.h>
+#include <netinet/in.h>
+#include <netinet/tcp.h>
+#include <poll.h>
+#include <pwd.h>
+#include <setjmp.h>
+#include <sgtty.h>
+#include <signal.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <strings.h>
+#include <stropts.h>
+#include <termio.h>
+#include <termios.h>
+#include <time.h>
+#include <unistd.h>
+#include <utime.h>
+#include <stddef.h>
+#include <dlfcn.h>
+#include <malloc.h>
+#include <memory.h>
+#include <netinet/if_ether.h>
+#include <stdint.h>
+#include <sys/utsname.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef getpass_r
+  return ((int*)(&getpass_r))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the _strtoi64 exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_84499/fast && make  -f CMakeFiles/cmTC_84499.dir/build.make CMakeFiles/cmTC_84499.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_84499.dir/CheckSymbolExists.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_84499.dir/CheckSymbolExists.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:59:19: error: ‘_strtoi64’ undeclared (first use in this function)
+   return ((int*)(&_strtoi64))[argc];
+                   ^
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:59:19: note: each undeclared identifier is reported only once for each function it appears in
+CMakeFiles/cmTC_84499.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_84499.dir/CheckSymbolExists.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_84499.dir/CheckSymbolExists.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_84499/fast' failed
+make: *** [cmTC_84499/fast] Error 2
+
+
+File /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdio.h>
+#include <inttypes.h>
+#include <sys/ioctl.h>
+#include <sys/param.h>
+#include <sys/poll.h>
+#include <sys/resource.h>
+#include <sys/select.h>
+#include <sys/socket.h>
+#include <sys/stat.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <sys/uio.h>
+#include <sys/un.h>
+#include <sys/xattr.h>
+#include <alloca.h>
+#include <arpa/inet.h>
+#include <arpa/tftp.h>
+#include <assert.h>
+#include <err.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <ifaddrs.h>
+#include <libgen.h>
+#include <locale.h>
+#include <net/if.h>
+#include <netdb.h>
+#include <netinet/in.h>
+#include <netinet/tcp.h>
+#include <poll.h>
+#include <pwd.h>
+#include <setjmp.h>
+#include <sgtty.h>
+#include <signal.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <strings.h>
+#include <stropts.h>
+#include <termio.h>
+#include <termios.h>
+#include <time.h>
+#include <unistd.h>
+#include <utime.h>
+#include <stddef.h>
+#include <dlfcn.h>
+#include <malloc.h>
+#include <memory.h>
+#include <netinet/if_ether.h>
+#include <stdint.h>
+#include <sys/utsname.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef _strtoi64
+  return ((int*)(&_strtoi64))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the setmode exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_452f1/fast && make  -f CMakeFiles/cmTC_452f1.dir/build.make CMakeFiles/cmTC_452f1.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_452f1.dir/CheckSymbolExists.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_452f1.dir/CheckSymbolExists.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:59:19: error: ‘setmode’ undeclared (first use in this function)
+   return ((int*)(&setmode))[argc];
+                   ^
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:59:19: note: each undeclared identifier is reported only once for each function it appears in
+CMakeFiles/cmTC_452f1.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_452f1.dir/CheckSymbolExists.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_452f1.dir/CheckSymbolExists.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_452f1/fast' failed
+make: *** [cmTC_452f1/fast] Error 2
+
+
+File /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdio.h>
+#include <inttypes.h>
+#include <sys/ioctl.h>
+#include <sys/param.h>
+#include <sys/poll.h>
+#include <sys/resource.h>
+#include <sys/select.h>
+#include <sys/socket.h>
+#include <sys/stat.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <sys/uio.h>
+#include <sys/un.h>
+#include <sys/xattr.h>
+#include <alloca.h>
+#include <arpa/inet.h>
+#include <arpa/tftp.h>
+#include <assert.h>
+#include <err.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <ifaddrs.h>
+#include <libgen.h>
+#include <locale.h>
+#include <net/if.h>
+#include <netdb.h>
+#include <netinet/in.h>
+#include <netinet/tcp.h>
+#include <poll.h>
+#include <pwd.h>
+#include <setjmp.h>
+#include <sgtty.h>
+#include <signal.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <strings.h>
+#include <stropts.h>
+#include <termio.h>
+#include <termios.h>
+#include <time.h>
+#include <unistd.h>
+#include <utime.h>
+#include <stddef.h>
+#include <dlfcn.h>
+#include <malloc.h>
+#include <memory.h>
+#include <netinet/if_ether.h>
+#include <stdint.h>
+#include <sys/utsname.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef setmode
+  return ((int*)(&setmode))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the function mach_absolute_time exists failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_6fa56/fast && make  -f CMakeFiles/cmTC_6fa56.dir/build.make CMakeFiles/cmTC_6fa56.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_6fa56.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -w -DCHECK_FUNCTION_EXISTS=mach_absolute_time -std=gnu11 -o CMakeFiles/cmTC_6fa56.dir/CheckFunctionExists.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Modules/CheckFunctionExists.c
+Linking C executable cmTC_6fa56
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Bootstrap.cmk/cmake -E cmake_link_script CMakeFiles/cmTC_6fa56.dir/link.txt --verbose=1
+/usr/bin/gcc  -w -DCHECK_FUNCTION_EXISTS=mach_absolute_time CMakeFiles/cmTC_6fa56.dir/CheckFunctionExists.c.o -o cmTC_6fa56 
+CMakeFiles/cmTC_6fa56.dir/CheckFunctionExists.c.o: In function `main':
+CheckFunctionExists.c:(.text+0x10): undefined reference to `mach_absolute_time'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_6fa56.dir/build.make:98: recipe for target 'cmTC_6fa56' failed
+make[1]: *** [cmTC_6fa56] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_6fa56/fast' failed
+make: *** [cmTC_6fa56/fast] Error 2
+
+
+
+Performing Curl Test HAVE_FSETXATTR_6 failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_065c8/fast && make  -f CMakeFiles/cmTC_065c8.dir/build.make CMakeFiles/cmTC_065c8.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_065c8.dir/CurlTests.c.o
+/usr/bin/gcc   -w -DHAVE_FSETXATTR_6  -DHAVE_STDIO_H -DHAVE_INTTYPES_H -DHAVE_SYS_IOCTL_H -DHAVE_SYS_PARAM_H -DHAVE_SYS_POLL_H -DHAVE_SYS_RESOURCE_H -DHAVE_SYS_SELECT_H -DHAVE_SYS_SOCKET_H -DHAVE_SYS_STAT_H -DHAVE_SYS_TIME_H -DHAVE_SYS_TYPES_H -DHAVE_SYS_UIO_H -DHAVE_SYS_UN_H -DHAVE_SYS_XATTR_H -DHAVE_ALLOCA_H -DHAVE_ARPA_INET_H -DHAVE_ARPA_TFTP_H -DHAVE_ASSERT_H -DHAVE_ERR_H -DHAVE_ERRNO_H -DHAVE_FCNTL_H -DHAVE_IFADDRS_H -DHAVE_LIBGEN_H -DHAVE_LOCALE_H -DHAVE_NET_IF_H -DHAVE_NETDB_H -DHAVE_NETINET_IN_H -DHAVE_NETINET_TCP_H -DHAVE_POLL_H -DHAVE_PWD_H -DHAVE_SETJMP_H -DHAVE_SGTTY_H -DHAVE_SIGNAL_H -DHAVE_STDBOOL_H -DHAVE_STDINT_H -DHAVE_STDIO_H -DHAVE_STDLIB_H -DHAVE_STRING_H -DHAVE_STRINGS_H -DHAVE_STROPTS_H -DHAVE_TERMIO_H -DHAVE_TERMIOS_H -DHAVE_TIME_H -DHAVE_UNISTD_H -DHAVE_UTIME_H -DHAVE_STDDEF_H -DHAVE_DLFCN_H -DHAVE_MALLOC_H -DHAVE_MEMORY_H -DHAVE_NETINET_IF_ETHER_H -DHAVE_STDINT_H -DHAVE_SYS_UTSNAME_H -std=gnu11 -o CMakeFiles/cmTC_065c8.dir/CurlTests.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c:526:3: error: too many arguments to function ‘fsetxattr’
+   fsetxattr(0, 0, 0, 0, 0, 0);
+   ^
+In file included from /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c:523:0:
+/usr/include/x86_64-linux-gnu/sys/xattr.h:54:12: note: declared here
+ extern int fsetxattr (int __fd, const char *__name, const void *__value,
+            ^
+CMakeFiles/cmTC_065c8.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_065c8.dir/CurlTests.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_065c8.dir/CurlTests.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_065c8/fast' failed
+make: *** [cmTC_065c8/fast] Error 2
+
+
+Determining size of ADDRESS_FAMILY failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_1a799/fast && make  -f CMakeFiles/cmTC_1a799.dir/build.make CMakeFiles/cmTC_1a799.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_1a799.dir/SIZEOF_ADDRESS_FAMILY.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_1a799.dir/SIZEOF_ADDRESS_FAMILY.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckTypeSize/SIZEOF_ADDRESS_FAMILY.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckTypeSize/SIZEOF_ADDRESS_FAMILY.c:4:20: fatal error: ws2def.h: No such file or directory
+compilation terminated.
+CMakeFiles/cmTC_1a799.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_1a799.dir/SIZEOF_ADDRESS_FAMILY.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_1a799.dir/SIZEOF_ADDRESS_FAMILY.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_1a799/fast' failed
+make: *** [cmTC_1a799/fast] Error 2
+
+
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckTypeSize/SIZEOF_ADDRESS_FAMILY.c:
+#include <sys/types.h>
+#include <stdint.h>
+#include <stddef.h>
+#include "ws2def.h"
+
+
+#undef KEY
+#if defined(__i386)
+# define KEY '_','_','i','3','8','6'
+#elif defined(__x86_64)
+# define KEY '_','_','x','8','6','_','6','4'
+#elif defined(__PPC64__)
+# define KEY '_','_','P','P','C','6','4','_','_'
+#elif defined(__ppc64__)
+# define KEY '_','_','p','p','c','6','4','_','_'
+#elif defined(__PPC__)
+# define KEY '_','_','P','P','C','_','_'
+#elif defined(__ppc__)
+# define KEY '_','_','p','p','c','_','_'
+#elif defined(__aarch64__)
+# define KEY '_','_','a','a','r','c','h','6','4','_','_'
+#elif defined(__ARM_ARCH_7A__)
+# define KEY '_','_','A','R','M','_','A','R','C','H','_','7','A','_','_'
+#elif defined(__ARM_ARCH_7S__)
+# define KEY '_','_','A','R','M','_','A','R','C','H','_','7','S','_','_'
+#endif
+
+#define SIZE (sizeof(ADDRESS_FAMILY))
+static char info_size[] =  {'I', 'N', 'F', 'O', ':', 's','i','z','e','[',
+  ('0' + ((SIZE / 10000)%10)),
+  ('0' + ((SIZE / 1000)%10)),
+  ('0' + ((SIZE / 100)%10)),
+  ('0' + ((SIZE / 10)%10)),
+  ('0' +  (SIZE    % 10)),
+  ']',
+#ifdef KEY
+  ' ','k','e','y','[', KEY, ']',
+#endif
+  '\0'};
+
+#ifdef __CLASSIC_C__
+int main(argc, argv) int argc; char *argv[];
+#else
+int main(int argc, char *argv[])
+#endif
+{
+  int require = 0;
+  require += info_size[argc];
+  (void)argv;
+  return require;
+}
+
+
+Performing Curl Test HAVE_IOCTLSOCKET failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_aa66a/fast && make  -f CMakeFiles/cmTC_aa66a.dir/build.make CMakeFiles/cmTC_aa66a.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_aa66a.dir/CurlTests.c.o
+/usr/bin/gcc   -w -DHAVE_IOCTLSOCKET  -DHAVE_STDIO_H -DHAVE_INTTYPES_H -DHAVE_SYS_IOCTL_H -DHAVE_SYS_PARAM_H -DHAVE_SYS_POLL_H -DHAVE_SYS_RESOURCE_H -DHAVE_SYS_SELECT_H -DHAVE_SYS_SOCKET_H -DHAVE_SYS_STAT_H -DHAVE_SYS_TIME_H -DHAVE_SYS_TYPES_H -DHAVE_SYS_UIO_H -DHAVE_SYS_UN_H -DHAVE_SYS_XATTR_H -DHAVE_ALLOCA_H -DHAVE_ARPA_INET_H -DHAVE_ARPA_TFTP_H -DHAVE_ASSERT_H -DHAVE_ERR_H -DHAVE_ERRNO_H -DHAVE_FCNTL_H -DHAVE_IFADDRS_H -DHAVE_LIBGEN_H -DHAVE_LOCALE_H -DHAVE_NET_IF_H -DHAVE_NETDB_H -DHAVE_NETINET_IN_H -DHAVE_NETINET_TCP_H -DHAVE_POLL_H -DHAVE_PWD_H -DHAVE_SETJMP_H -DHAVE_SGTTY_H -DHAVE_SIGNAL_H -DHAVE_STDBOOL_H -DHAVE_STDINT_H -DHAVE_STDIO_H -DHAVE_STDLIB_H -DHAVE_STRING_H -DHAVE_STRINGS_H -DHAVE_STROPTS_H -DHAVE_TERMIO_H -DHAVE_TERMIOS_H -DHAVE_TIME_H -DHAVE_UNISTD_H -DHAVE_UTIME_H -DHAVE_STDDEF_H -DHAVE_DLFCN_H -DHAVE_MALLOC_H -DHAVE_MEMORY_H -DHAVE_NETINET_IF_ETHER_H -DHAVE_STDINT_H -DHAVE_SYS_UTSNAME_H -std=gnu11 -o CMakeFiles/cmTC_aa66a.dir/CurlTests.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c:308:44: error: ‘FIONBIO’ undeclared (first use in this function)
+  unsigned long flags = ioctlsocket(socket, FIONBIO, &flags);
+                                            ^
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c:308:44: note: each undeclared identifier is reported only once for each function it appears in
+CMakeFiles/cmTC_aa66a.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_aa66a.dir/CurlTests.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_aa66a.dir/CurlTests.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_aa66a/fast' failed
+make: *** [cmTC_aa66a/fast] Error 2
+
+
+Performing Curl Test HAVE_IOCTLSOCKET_CAMEL failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_5d521/fast && make  -f CMakeFiles/cmTC_5d521.dir/build.make CMakeFiles/cmTC_5d521.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_5d521.dir/CurlTests.c.o
+/usr/bin/gcc   -w -DHAVE_IOCTLSOCKET_CAMEL  -DHAVE_STDIO_H -DHAVE_INTTYPES_H -DHAVE_SYS_IOCTL_H -DHAVE_SYS_PARAM_H -DHAVE_SYS_POLL_H -DHAVE_SYS_RESOURCE_H -DHAVE_SYS_SELECT_H -DHAVE_SYS_SOCKET_H -DHAVE_SYS_STAT_H -DHAVE_SYS_TIME_H -DHAVE_SYS_TYPES_H -DHAVE_SYS_UIO_H -DHAVE_SYS_UN_H -DHAVE_SYS_XATTR_H -DHAVE_ALLOCA_H -DHAVE_ARPA_INET_H -DHAVE_ARPA_TFTP_H -DHAVE_ASSERT_H -DHAVE_ERR_H -DHAVE_ERRNO_H -DHAVE_FCNTL_H -DHAVE_IFADDRS_H -DHAVE_LIBGEN_H -DHAVE_LOCALE_H -DHAVE_NET_IF_H -DHAVE_NETDB_H -DHAVE_NETINET_IN_H -DHAVE_NETINET_TCP_H -DHAVE_POLL_H -DHAVE_PWD_H -DHAVE_SETJMP_H -DHAVE_SGTTY_H -DHAVE_SIGNAL_H -DHAVE_STDBOOL_H -DHAVE_STDINT_H -DHAVE_STDIO_H -DHAVE_STDLIB_H -DHAVE_STRING_H -DHAVE_STRINGS_H -DHAVE_STROPTS_H -DHAVE_TERMIO_H -DHAVE_TERMIOS_H -DHAVE_TIME_H -DHAVE_UNISTD_H -DHAVE_UTIME_H -DHAVE_STDDEF_H -DHAVE_DLFCN_H -DHAVE_MALLOC_H -DHAVE_MEMORY_H -DHAVE_NETINET_IF_ETHER_H -DHAVE_STDINT_H -DHAVE_SYS_UTSNAME_H -std=gnu11 -o CMakeFiles/cmTC_5d521.dir/CurlTests.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c
+Linking C executable cmTC_5d521
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Bootstrap.cmk/cmake -E cmake_link_script CMakeFiles/cmTC_5d521.dir/link.txt --verbose=1
+/usr/bin/gcc  -w -DHAVE_IOCTLSOCKET_CAMEL  -DHAVE_STDIO_H -DHAVE_INTTYPES_H -DHAVE_SYS_IOCTL_H -DHAVE_SYS_PARAM_H -DHAVE_SYS_POLL_H -DHAVE_SYS_RESOURCE_H -DHAVE_SYS_SELECT_H -DHAVE_SYS_SOCKET_H -DHAVE_SYS_STAT_H -DHAVE_SYS_TIME_H -DHAVE_SYS_TYPES_H -DHAVE_SYS_UIO_H -DHAVE_SYS_UN_H -DHAVE_SYS_XATTR_H -DHAVE_ALLOCA_H -DHAVE_ARPA_INET_H -DHAVE_ARPA_TFTP_H -DHAVE_ASSERT_H -DHAVE_ERR_H -DHAVE_ERRNO_H -DHAVE_FCNTL_H -DHAVE_IFADDRS_H -DHAVE_LIBGEN_H -DHAVE_LOCALE_H -DHAVE_NET_IF_H -DHAVE_NETDB_H -DHAVE_NETINET_IN_H -DHAVE_NETINET_TCP_H -DHAVE_POLL_H -DHAVE_PWD_H -DHAVE_SETJMP_H -DHAVE_SGTTY_H -DHAVE_SIGNAL_H -DHAVE_STDBOOL_H -DHAVE_STDINT_H -DHAVE_STDIO_H -DHAVE_STDLIB_H -DHAVE_STRING_H -DHAVE_STRINGS_H -DHAVE_STROPTS_H -DHAVE_TERMIO_H -DHAVE_TERMIOS_H -DHAVE_TIME_H -DHAVE_UNISTD_H -DHAVE_UTIME_H -DHAVE_STDDEF_H -DHAVE_DLFCN_H -DHAVE_MALLOC_H -DHAVE_MEMORY_H -DHAVE_NETINET_IF_ETHER_H -DHAVE_STDINT_H -DHAVE_SYS_UTSNAME_H CMakeFiles/cmTC_5d521.dir/CurlTests.c.o -o cmTC_5d521 
+CMakeFiles/cmTC_5d521.dir/CurlTests.c.o: In function `main':
+CurlTests.c:(.text+0x19): undefined reference to `IoctlSocket'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_5d521.dir/build.make:98: recipe for target 'cmTC_5d521' failed
+make[1]: *** [cmTC_5d521] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_5d521/fast' failed
+make: *** [cmTC_5d521/fast] Error 2
+
+
+Performing Curl Test HAVE_IOCTLSOCKET_CAMEL_FIONBIO failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_b8ed5/fast && make  -f CMakeFiles/cmTC_b8ed5.dir/build.make CMakeFiles/cmTC_b8ed5.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_b8ed5.dir/CurlTests.c.o
+/usr/bin/gcc   -w -DHAVE_IOCTLSOCKET_CAMEL_FIONBIO  -DHAVE_STDIO_H -DHAVE_INTTYPES_H -DHAVE_SYS_IOCTL_H -DHAVE_SYS_PARAM_H -DHAVE_SYS_POLL_H -DHAVE_SYS_RESOURCE_H -DHAVE_SYS_SELECT_H -DHAVE_SYS_SOCKET_H -DHAVE_SYS_STAT_H -DHAVE_SYS_TIME_H -DHAVE_SYS_TYPES_H -DHAVE_SYS_UIO_H -DHAVE_SYS_UN_H -DHAVE_SYS_XATTR_H -DHAVE_ALLOCA_H -DHAVE_ARPA_INET_H -DHAVE_ARPA_TFTP_H -DHAVE_ASSERT_H -DHAVE_ERR_H -DHAVE_ERRNO_H -DHAVE_FCNTL_H -DHAVE_IFADDRS_H -DHAVE_LIBGEN_H -DHAVE_LOCALE_H -DHAVE_NET_IF_H -DHAVE_NETDB_H -DHAVE_NETINET_IN_H -DHAVE_NETINET_TCP_H -DHAVE_POLL_H -DHAVE_PWD_H -DHAVE_SETJMP_H -DHAVE_SGTTY_H -DHAVE_SIGNAL_H -DHAVE_STDBOOL_H -DHAVE_STDINT_H -DHAVE_STDIO_H -DHAVE_STDLIB_H -DHAVE_STRING_H -DHAVE_STRINGS_H -DHAVE_STROPTS_H -DHAVE_TERMIO_H -DHAVE_TERMIOS_H -DHAVE_TIME_H -DHAVE_UNISTD_H -DHAVE_UTIME_H -DHAVE_STDDEF_H -DHAVE_DLFCN_H -DHAVE_MALLOC_H -DHAVE_MEMORY_H -DHAVE_NETINET_IF_ETHER_H -DHAVE_STDINT_H -DHAVE_SYS_UTSNAME_H -std=gnu11 -o CMakeFiles/cmTC_b8ed5.dir/CurlTests.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c:364:32: error: ‘FIONBIO’ undeclared (first use in this function)
+         if(0 != ioctlsocket(0, FIONBIO, &flags))
+                                ^
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c:364:32: note: each undeclared identifier is reported only once for each function it appears in
+CMakeFiles/cmTC_b8ed5.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_b8ed5.dir/CurlTests.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_b8ed5.dir/CurlTests.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_b8ed5/fast' failed
+make: *** [cmTC_b8ed5/fast] Error 2
+
+
+Performing Curl Test HAVE_IOCTLSOCKET_FIONBIO failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_635ea/fast && make  -f CMakeFiles/cmTC_635ea.dir/build.make CMakeFiles/cmTC_635ea.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_635ea.dir/CurlTests.c.o
+/usr/bin/gcc   -w -DHAVE_IOCTLSOCKET_FIONBIO  -DHAVE_STDIO_H -DHAVE_INTTYPES_H -DHAVE_SYS_IOCTL_H -DHAVE_SYS_PARAM_H -DHAVE_SYS_POLL_H -DHAVE_SYS_RESOURCE_H -DHAVE_SYS_SELECT_H -DHAVE_SYS_SOCKET_H -DHAVE_SYS_STAT_H -DHAVE_SYS_TIME_H -DHAVE_SYS_TYPES_H -DHAVE_SYS_UIO_H -DHAVE_SYS_UN_H -DHAVE_SYS_XATTR_H -DHAVE_ALLOCA_H -DHAVE_ARPA_INET_H -DHAVE_ARPA_TFTP_H -DHAVE_ASSERT_H -DHAVE_ERR_H -DHAVE_ERRNO_H -DHAVE_FCNTL_H -DHAVE_IFADDRS_H -DHAVE_LIBGEN_H -DHAVE_LOCALE_H -DHAVE_NET_IF_H -DHAVE_NETDB_H -DHAVE_NETINET_IN_H -DHAVE_NETINET_TCP_H -DHAVE_POLL_H -DHAVE_PWD_H -DHAVE_SETJMP_H -DHAVE_SGTTY_H -DHAVE_SIGNAL_H -DHAVE_STDBOOL_H -DHAVE_STDINT_H -DHAVE_STDIO_H -DHAVE_STDLIB_H -DHAVE_STRING_H -DHAVE_STRINGS_H -DHAVE_STROPTS_H -DHAVE_TERMIO_H -DHAVE_TERMIOS_H -DHAVE_TIME_H -DHAVE_UNISTD_H -DHAVE_UTIME_H -DHAVE_STDDEF_H -DHAVE_DLFCN_H -DHAVE_MALLOC_H -DHAVE_MEMORY_H -DHAVE_NETINET_IF_ETHER_H -DHAVE_STDINT_H -DHAVE_SYS_UTSNAME_H -std=gnu11 -o CMakeFiles/cmTC_635ea.dir/CurlTests.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c:391:32: error: ‘FIONBIO’ undeclared (first use in this function)
+         if(0 != ioctlsocket(0, FIONBIO, &flags))
+                                ^
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c:391:32: note: each undeclared identifier is reported only once for each function it appears in
+CMakeFiles/cmTC_635ea.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_635ea.dir/CurlTests.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_635ea.dir/CurlTests.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_635ea/fast' failed
+make: *** [cmTC_635ea/fast] Error 2
+
+
+Performing Curl Test HAVE_SETSOCKOPT_SO_NONBLOCK failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_1f6be/fast && make  -f CMakeFiles/cmTC_1f6be.dir/build.make CMakeFiles/cmTC_1f6be.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_1f6be.dir/CurlTests.c.o
+/usr/bin/gcc   -w -DHAVE_SETSOCKOPT_SO_NONBLOCK  -DHAVE_STDIO_H -DHAVE_INTTYPES_H -DHAVE_SYS_IOCTL_H -DHAVE_SYS_PARAM_H -DHAVE_SYS_POLL_H -DHAVE_SYS_RESOURCE_H -DHAVE_SYS_SELECT_H -DHAVE_SYS_SOCKET_H -DHAVE_SYS_STAT_H -DHAVE_SYS_TIME_H -DHAVE_SYS_TYPES_H -DHAVE_SYS_UIO_H -DHAVE_SYS_UN_H -DHAVE_SYS_XATTR_H -DHAVE_ALLOCA_H -DHAVE_ARPA_INET_H -DHAVE_ARPA_TFTP_H -DHAVE_ASSERT_H -DHAVE_ERR_H -DHAVE_ERRNO_H -DHAVE_FCNTL_H -DHAVE_IFADDRS_H -DHAVE_LIBGEN_H -DHAVE_LOCALE_H -DHAVE_NET_IF_H -DHAVE_NETDB_H -DHAVE_NETINET_IN_H -DHAVE_NETINET_TCP_H -DHAVE_POLL_H -DHAVE_PWD_H -DHAVE_SETJMP_H -DHAVE_SGTTY_H -DHAVE_SIGNAL_H -DHAVE_STDBOOL_H -DHAVE_STDINT_H -DHAVE_STDIO_H -DHAVE_STDLIB_H -DHAVE_STRING_H -DHAVE_STRINGS_H -DHAVE_STROPTS_H -DHAVE_TERMIO_H -DHAVE_TERMIOS_H -DHAVE_TIME_H -DHAVE_UNISTD_H -DHAVE_UTIME_H -DHAVE_STDDEF_H -DHAVE_DLFCN_H -DHAVE_MALLOC_H -DHAVE_MEMORY_H -DHAVE_NETINET_IF_ETHER_H -DHAVE_STDINT_H -DHAVE_SYS_UTSNAME_H -std=gnu11 -o CMakeFiles/cmTC_1f6be.dir/CurlTests.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c:487:43: error: ‘SO_NONBLOCK’ undeclared (first use in this function)
+         if(0 != setsockopt(0, SOL_SOCKET, SO_NONBLOCK, 0, 0))
+                                           ^
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c:487:43: note: each undeclared identifier is reported only once for each function it appears in
+CMakeFiles/cmTC_1f6be.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_1f6be.dir/CurlTests.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_1f6be.dir/CurlTests.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_1f6be/fast' failed
+make: *** [cmTC_1f6be/fast] Error 2
+
+
+Performing Curl Test HAVE_O_NONBLOCK failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_e6efb/fast && make  -f CMakeFiles/cmTC_e6efb.dir/build.make CMakeFiles/cmTC_e6efb.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_e6efb.dir/CurlTests.c.o
+/usr/bin/gcc   -w -DHAVE_O_NONBLOCK  -DHAVE_STDIO_H -DHAVE_INTTYPES_H -DHAVE_SYS_IOCTL_H -DHAVE_SYS_PARAM_H -DHAVE_SYS_POLL_H -DHAVE_SYS_RESOURCE_H -DHAVE_SYS_SELECT_H -DHAVE_SYS_SOCKET_H -DHAVE_SYS_STAT_H -DHAVE_SYS_TIME_H -DHAVE_SYS_TYPES_H -DHAVE_SYS_UIO_H -DHAVE_SYS_UN_H -DHAVE_SYS_XATTR_H -DHAVE_ALLOCA_H -DHAVE_ARPA_INET_H -DHAVE_ARPA_TFTP_H -DHAVE_ASSERT_H -DHAVE_ERR_H -DHAVE_ERRNO_H -DHAVE_FCNTL_H -DHAVE_IFADDRS_H -DHAVE_LIBGEN_H -DHAVE_LOCALE_H -DHAVE_NET_IF_H -DHAVE_NETDB_H -DHAVE_NETINET_IN_H -DHAVE_NETINET_TCP_H -DHAVE_POLL_H -DHAVE_PWD_H -DHAVE_SETJMP_H -DHAVE_SGTTY_H -DHAVE_SIGNAL_H -DHAVE_STDBOOL_H -DHAVE_STDINT_H -DHAVE_STDIO_H -DHAVE_STDLIB_H -DHAVE_STRING_H -DHAVE_STRINGS_H -DHAVE_STROPTS_H -DHAVE_TERMIO_H -DHAVE_TERMIOS_H -DHAVE_TIME_H -DHAVE_UNISTD_H -DHAVE_UTIME_H -DHAVE_STDDEF_H -DHAVE_DLFCN_H -DHAVE_MALLOC_H -DHAVE_MEMORY_H -DHAVE_NETINET_IF_ETHER_H -DHAVE_STDINT_H -DHAVE_SYS_UTSNAME_H -std=gnu11 -o CMakeFiles/cmTC_e6efb.dir/CurlTests.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c
+Linking C executable cmTC_e6efb
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Bootstrap.cmk/cmake -E cmake_link_script CMakeFiles/cmTC_e6efb.dir/link.txt --verbose=1
+/usr/bin/gcc  -w -DHAVE_O_NONBLOCK  -DHAVE_STDIO_H -DHAVE_INTTYPES_H -DHAVE_SYS_IOCTL_H -DHAVE_SYS_PARAM_H -DHAVE_SYS_POLL_H -DHAVE_SYS_RESOURCE_H -DHAVE_SYS_SELECT_H -DHAVE_SYS_SOCKET_H -DHAVE_SYS_STAT_H -DHAVE_SYS_TIME_H -DHAVE_SYS_TYPES_H -DHAVE_SYS_UIO_H -DHAVE_SYS_UN_H -DHAVE_SYS_XATTR_H -DHAVE_ALLOCA_H -DHAVE_ARPA_INET_H -DHAVE_ARPA_TFTP_H -DHAVE_ASSERT_H -DHAVE_ERR_H -DHAVE_ERRNO_H -DHAVE_FCNTL_H -DHAVE_IFADDRS_H -DHAVE_LIBGEN_H -DHAVE_LOCALE_H -DHAVE_NET_IF_H -DHAVE_NETDB_H -DHAVE_NETINET_IN_H -DHAVE_NETINET_TCP_H -DHAVE_POLL_H -DHAVE_PWD_H -DHAVE_SETJMP_H -DHAVE_SGTTY_H -DHAVE_SIGNAL_H -DHAVE_STDBOOL_H -DHAVE_STDINT_H -DHAVE_STDIO_H -DHAVE_STDLIB_H -DHAVE_STRING_H -DHAVE_STRINGS_H -DHAVE_STROPTS_H -DHAVE_TERMIO_H -DHAVE_TERMIOS_H -DHAVE_TIME_H -DHAVE_UNISTD_H -DHAVE_UTIME_H -DHAVE_STDDEF_H -DHAVE_DLFCN_H -DHAVE_MALLOC_H -DHAVE_MEMORY_H -DHAVE_NETINET_IF_ETHER_H -DHAVE_STDINT_H -DHAVE_SYS_UTSNAME_H CMakeFiles/cmTC_e6efb.dir/CurlTests.c.o -o cmTC_e6efb 
+/usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu/crt1.o: In function `_start':
+(.text+0x20): undefined reference to `main'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_e6efb.dir/build.make:98: recipe for target 'cmTC_e6efb' failed
+make[1]: *** [cmTC_e6efb] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_e6efb/fast' failed
+make: *** [cmTC_e6efb/fast] Error 2
+
+
+Performing Curl Test HAVE_GETHOSTBYADDR_R_5 failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_24173/fast && make  -f CMakeFiles/cmTC_24173.dir/build.make CMakeFiles/cmTC_24173.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_24173.dir/CurlTests.c.o
+/usr/bin/gcc   -w -DHAVE_GETHOSTBYADDR_R_5  -DHAVE_STDIO_H -DHAVE_INTTYPES_H -DHAVE_SYS_IOCTL_H -DHAVE_SYS_PARAM_H -DHAVE_SYS_POLL_H -DHAVE_SYS_RESOURCE_H -DHAVE_SYS_SELECT_H -DHAVE_SYS_SOCKET_H -DHAVE_SYS_STAT_H -DHAVE_SYS_TIME_H -DHAVE_SYS_TYPES_H -DHAVE_SYS_UIO_H -DHAVE_SYS_UN_H -DHAVE_SYS_XATTR_H -DHAVE_ALLOCA_H -DHAVE_ARPA_INET_H -DHAVE_ARPA_TFTP_H -DHAVE_ASSERT_H -DHAVE_ERR_H -DHAVE_ERRNO_H -DHAVE_FCNTL_H -DHAVE_IFADDRS_H -DHAVE_LIBGEN_H -DHAVE_LOCALE_H -DHAVE_NET_IF_H -DHAVE_NETDB_H -DHAVE_NETINET_IN_H -DHAVE_NETINET_TCP_H -DHAVE_POLL_H -DHAVE_PWD_H -DHAVE_SETJMP_H -DHAVE_SGTTY_H -DHAVE_SIGNAL_H -DHAVE_STDBOOL_H -DHAVE_STDINT_H -DHAVE_STDIO_H -DHAVE_STDLIB_H -DHAVE_STRING_H -DHAVE_STRINGS_H -DHAVE_STROPTS_H -DHAVE_TERMIO_H -DHAVE_TERMIOS_H -DHAVE_TIME_H -DHAVE_UNISTD_H -DHAVE_UTIME_H -DHAVE_STDDEF_H -DHAVE_DLFCN_H -DHAVE_MALLOC_H -DHAVE_MEMORY_H -DHAVE_NETINET_IF_ETHER_H -DHAVE_STDINT_H -DHAVE_SYS_UTSNAME_H -std=gnu11 -o CMakeFiles/cmTC_24173.dir/CurlTests.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c:106:23: error: storage size of ‘hdata’ isn’t known
+   struct hostent_data hdata;
+                       ^
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c:127:8: error: too few arguments to function ‘gethostbyaddr_r’
+   rc = gethostbyaddr_r(address, length, type, &h, &hdata);
+        ^
+In file included from /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c:93:0:
+/usr/include/netdb.h:172:12: note: declared here
+ extern int gethostbyaddr_r (const void *__restrict __addr, __socklen_t __len,
+            ^
+CMakeFiles/cmTC_24173.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_24173.dir/CurlTests.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_24173.dir/CurlTests.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_24173/fast' failed
+make: *** [cmTC_24173/fast] Error 2
+
+
+Performing Curl Test HAVE_GETHOSTBYADDR_R_7 failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_3269b/fast && make  -f CMakeFiles/cmTC_3269b.dir/build.make CMakeFiles/cmTC_3269b.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_3269b.dir/CurlTests.c.o
+/usr/bin/gcc   -w -DHAVE_GETHOSTBYADDR_R_7  -DHAVE_STDIO_H -DHAVE_INTTYPES_H -DHAVE_SYS_IOCTL_H -DHAVE_SYS_PARAM_H -DHAVE_SYS_POLL_H -DHAVE_SYS_RESOURCE_H -DHAVE_SYS_SELECT_H -DHAVE_SYS_SOCKET_H -DHAVE_SYS_STAT_H -DHAVE_SYS_TIME_H -DHAVE_SYS_TYPES_H -DHAVE_SYS_UIO_H -DHAVE_SYS_UN_H -DHAVE_SYS_XATTR_H -DHAVE_ALLOCA_H -DHAVE_ARPA_INET_H -DHAVE_ARPA_TFTP_H -DHAVE_ASSERT_H -DHAVE_ERR_H -DHAVE_ERRNO_H -DHAVE_FCNTL_H -DHAVE_IFADDRS_H -DHAVE_LIBGEN_H -DHAVE_LOCALE_H -DHAVE_NET_IF_H -DHAVE_NETDB_H -DHAVE_NETINET_IN_H -DHAVE_NETINET_TCP_H -DHAVE_POLL_H -DHAVE_PWD_H -DHAVE_SETJMP_H -DHAVE_SGTTY_H -DHAVE_SIGNAL_H -DHAVE_STDBOOL_H -DHAVE_STDINT_H -DHAVE_STDIO_H -DHAVE_STDLIB_H -DHAVE_STRING_H -DHAVE_STRINGS_H -DHAVE_STROPTS_H -DHAVE_TERMIO_H -DHAVE_TERMIOS_H -DHAVE_TIME_H -DHAVE_UNISTD_H -DHAVE_UTIME_H -DHAVE_STDDEF_H -DHAVE_DLFCN_H -DHAVE_MALLOC_H -DHAVE_MEMORY_H -DHAVE_NETINET_IF_ETHER_H -DHAVE_STDINT_H -DHAVE_SYS_UTSNAME_H -std=gnu11 -o CMakeFiles/cmTC_3269b.dir/CurlTests.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c:131:8: error: too few arguments to function ‘gethostbyaddr_r’
+   hp = gethostbyaddr_r(address, length, type, &h, buffer, 8192, &h_errnop);
+        ^
+In file included from /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c:93:0:
+/usr/include/netdb.h:172:12: note: declared here
+ extern int gethostbyaddr_r (const void *__restrict __addr, __socklen_t __len,
+            ^
+CMakeFiles/cmTC_3269b.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_3269b.dir/CurlTests.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_3269b.dir/CurlTests.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_3269b/fast' failed
+make: *** [cmTC_3269b/fast] Error 2
+
+
+Performing Curl Test HAVE_GETHOSTBYADDR_R_5_REENTRANT failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_ea172/fast && make  -f CMakeFiles/cmTC_ea172.dir/build.make CMakeFiles/cmTC_ea172.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_ea172.dir/CurlTests.c.o
+/usr/bin/gcc   -w -DHAVE_GETHOSTBYADDR_R_5_REENTRANT  -DHAVE_STDIO_H -DHAVE_INTTYPES_H -DHAVE_SYS_IOCTL_H -DHAVE_SYS_PARAM_H -DHAVE_SYS_POLL_H -DHAVE_SYS_RESOURCE_H -DHAVE_SYS_SELECT_H -DHAVE_SYS_SOCKET_H -DHAVE_SYS_STAT_H -DHAVE_SYS_TIME_H -DHAVE_SYS_TYPES_H -DHAVE_SYS_UIO_H -DHAVE_SYS_UN_H -DHAVE_SYS_XATTR_H -DHAVE_ALLOCA_H -DHAVE_ARPA_INET_H -DHAVE_ARPA_TFTP_H -DHAVE_ASSERT_H -DHAVE_ERR_H -DHAVE_ERRNO_H -DHAVE_FCNTL_H -DHAVE_IFADDRS_H -DHAVE_LIBGEN_H -DHAVE_LOCALE_H -DHAVE_NET_IF_H -DHAVE_NETDB_H -DHAVE_NETINET_IN_H -DHAVE_NETINET_TCP_H -DHAVE_POLL_H -DHAVE_PWD_H -DHAVE_SETJMP_H -DHAVE_SGTTY_H -DHAVE_SIGNAL_H -DHAVE_STDBOOL_H -DHAVE_STDINT_H -DHAVE_STDIO_H -DHAVE_STDLIB_H -DHAVE_STRING_H -DHAVE_STRINGS_H -DHAVE_STROPTS_H -DHAVE_TERMIO_H -DHAVE_TERMIOS_H -DHAVE_TIME_H -DHAVE_UNISTD_H -DHAVE_UTIME_H -DHAVE_STDDEF_H -DHAVE_DLFCN_H -DHAVE_MALLOC_H -DHAVE_MEMORY_H -DHAVE_NETINET_IF_ETHER_H -DHAVE_STDINT_H -DHAVE_SYS_UTSNAME_H -std=gnu11 -o CMakeFiles/cmTC_ea172.dir/CurlTests.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c:106:23: error: storage size of ‘hdata’ isn’t known
+   struct hostent_data hdata;
+                       ^
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c:127:8: error: too few arguments to function ‘gethostbyaddr_r’
+   rc = gethostbyaddr_r(address, length, type, &h, &hdata);
+        ^
+In file included from /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c:93:0:
+/usr/include/netdb.h:172:12: note: declared here
+ extern int gethostbyaddr_r (const void *__restrict __addr, __socklen_t __len,
+            ^
+CMakeFiles/cmTC_ea172.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_ea172.dir/CurlTests.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_ea172.dir/CurlTests.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_ea172/fast' failed
+make: *** [cmTC_ea172/fast] Error 2
+
+
+Performing Curl Test HAVE_GETHOSTBYADDR_R_7_REENTRANT failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_ae92a/fast && make  -f CMakeFiles/cmTC_ae92a.dir/build.make CMakeFiles/cmTC_ae92a.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_ae92a.dir/CurlTests.c.o
+/usr/bin/gcc   -w -DHAVE_GETHOSTBYADDR_R_7_REENTRANT  -DHAVE_STDIO_H -DHAVE_INTTYPES_H -DHAVE_SYS_IOCTL_H -DHAVE_SYS_PARAM_H -DHAVE_SYS_POLL_H -DHAVE_SYS_RESOURCE_H -DHAVE_SYS_SELECT_H -DHAVE_SYS_SOCKET_H -DHAVE_SYS_STAT_H -DHAVE_SYS_TIME_H -DHAVE_SYS_TYPES_H -DHAVE_SYS_UIO_H -DHAVE_SYS_UN_H -DHAVE_SYS_XATTR_H -DHAVE_ALLOCA_H -DHAVE_ARPA_INET_H -DHAVE_ARPA_TFTP_H -DHAVE_ASSERT_H -DHAVE_ERR_H -DHAVE_ERRNO_H -DHAVE_FCNTL_H -DHAVE_IFADDRS_H -DHAVE_LIBGEN_H -DHAVE_LOCALE_H -DHAVE_NET_IF_H -DHAVE_NETDB_H -DHAVE_NETINET_IN_H -DHAVE_NETINET_TCP_H -DHAVE_POLL_H -DHAVE_PWD_H -DHAVE_SETJMP_H -DHAVE_SGTTY_H -DHAVE_SIGNAL_H -DHAVE_STDBOOL_H -DHAVE_STDINT_H -DHAVE_STDIO_H -DHAVE_STDLIB_H -DHAVE_STRING_H -DHAVE_STRINGS_H -DHAVE_STROPTS_H -DHAVE_TERMIO_H -DHAVE_TERMIOS_H -DHAVE_TIME_H -DHAVE_UNISTD_H -DHAVE_UTIME_H -DHAVE_STDDEF_H -DHAVE_DLFCN_H -DHAVE_MALLOC_H -DHAVE_MEMORY_H -DHAVE_NETINET_IF_ETHER_H -DHAVE_STDINT_H -DHAVE_SYS_UTSNAME_H -std=gnu11 -o CMakeFiles/cmTC_ae92a.dir/CurlTests.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c:131:8: error: too few arguments to function ‘gethostbyaddr_r’
+   hp = gethostbyaddr_r(address, length, type, &h, buffer, 8192, &h_errnop);
+        ^
+In file included from /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c:93:0:
+/usr/include/netdb.h:172:12: note: declared here
+ extern int gethostbyaddr_r (const void *__restrict __addr, __socklen_t __len,
+            ^
+CMakeFiles/cmTC_ae92a.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_ae92a.dir/CurlTests.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_ae92a.dir/CurlTests.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_ae92a/fast' failed
+make: *** [cmTC_ae92a/fast] Error 2
+
+
+Performing Curl Test HAVE_GETHOSTBYNAME_R_3 failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_66c78/fast && make  -f CMakeFiles/cmTC_66c78.dir/build.make CMakeFiles/cmTC_66c78.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_66c78.dir/CurlTests.c.o
+/usr/bin/gcc   -w -DHAVE_GETHOSTBYNAME_R_3  -DHAVE_STDIO_H -DHAVE_INTTYPES_H -DHAVE_SYS_IOCTL_H -DHAVE_SYS_PARAM_H -DHAVE_SYS_POLL_H -DHAVE_SYS_RESOURCE_H -DHAVE_SYS_SELECT_H -DHAVE_SYS_SOCKET_H -DHAVE_SYS_STAT_H -DHAVE_SYS_TIME_H -DHAVE_SYS_TYPES_H -DHAVE_SYS_UIO_H -DHAVE_SYS_UN_H -DHAVE_SYS_XATTR_H -DHAVE_ALLOCA_H -DHAVE_ARPA_INET_H -DHAVE_ARPA_TFTP_H -DHAVE_ASSERT_H -DHAVE_ERR_H -DHAVE_ERRNO_H -DHAVE_FCNTL_H -DHAVE_IFADDRS_H -DHAVE_LIBGEN_H -DHAVE_LOCALE_H -DHAVE_NET_IF_H -DHAVE_NETDB_H -DHAVE_NETINET_IN_H -DHAVE_NETINET_TCP_H -DHAVE_POLL_H -DHAVE_PWD_H -DHAVE_SETJMP_H -DHAVE_SGTTY_H -DHAVE_SIGNAL_H -DHAVE_STDBOOL_H -DHAVE_STDINT_H -DHAVE_STDIO_H -DHAVE_STDLIB_H -DHAVE_STRING_H -DHAVE_STRINGS_H -DHAVE_STROPTS_H -DHAVE_TERMIO_H -DHAVE_TERMIOS_H -DHAVE_TIME_H -DHAVE_UNISTD_H -DHAVE_UTIME_H -DHAVE_STDDEF_H -DHAVE_DLFCN_H -DHAVE_MALLOC_H -DHAVE_MEMORY_H -DHAVE_NETINET_IF_ETHER_H -DHAVE_STDINT_H -DHAVE_SYS_UTSNAME_H -std=gnu11 -o CMakeFiles/cmTC_66c78.dir/CurlTests.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c:106:23: error: storage size of ‘hdata’ isn’t known
+   struct hostent_data hdata;
+                       ^
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c:141:8: error: too few arguments to function ‘gethostbyname_r’
+   rc = gethostbyname_r(address, &h, &hdata);
+        ^
+In file included from /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c:93:0:
+/usr/include/netdb.h:179:12: note: declared here
+ extern int gethostbyname_r (const char *__restrict __name,
+            ^
+CMakeFiles/cmTC_66c78.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_66c78.dir/CurlTests.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_66c78.dir/CurlTests.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_66c78/fast' failed
+make: *** [cmTC_66c78/fast] Error 2
+
+
+Performing Curl Test HAVE_GETHOSTBYNAME_R_5 failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_2879f/fast && make  -f CMakeFiles/cmTC_2879f.dir/build.make CMakeFiles/cmTC_2879f.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_2879f.dir/CurlTests.c.o
+/usr/bin/gcc   -w -DHAVE_GETHOSTBYNAME_R_5  -DHAVE_STDIO_H -DHAVE_INTTYPES_H -DHAVE_SYS_IOCTL_H -DHAVE_SYS_PARAM_H -DHAVE_SYS_POLL_H -DHAVE_SYS_RESOURCE_H -DHAVE_SYS_SELECT_H -DHAVE_SYS_SOCKET_H -DHAVE_SYS_STAT_H -DHAVE_SYS_TIME_H -DHAVE_SYS_TYPES_H -DHAVE_SYS_UIO_H -DHAVE_SYS_UN_H -DHAVE_SYS_XATTR_H -DHAVE_ALLOCA_H -DHAVE_ARPA_INET_H -DHAVE_ARPA_TFTP_H -DHAVE_ASSERT_H -DHAVE_ERR_H -DHAVE_ERRNO_H -DHAVE_FCNTL_H -DHAVE_IFADDRS_H -DHAVE_LIBGEN_H -DHAVE_LOCALE_H -DHAVE_NET_IF_H -DHAVE_NETDB_H -DHAVE_NETINET_IN_H -DHAVE_NETINET_TCP_H -DHAVE_POLL_H -DHAVE_PWD_H -DHAVE_SETJMP_H -DHAVE_SGTTY_H -DHAVE_SIGNAL_H -DHAVE_STDBOOL_H -DHAVE_STDINT_H -DHAVE_STDIO_H -DHAVE_STDLIB_H -DHAVE_STRING_H -DHAVE_STRINGS_H -DHAVE_STROPTS_H -DHAVE_TERMIO_H -DHAVE_TERMIOS_H -DHAVE_TIME_H -DHAVE_UNISTD_H -DHAVE_UTIME_H -DHAVE_STDDEF_H -DHAVE_DLFCN_H -DHAVE_MALLOC_H -DHAVE_MEMORY_H -DHAVE_NETINET_IF_ETHER_H -DHAVE_STDINT_H -DHAVE_SYS_UTSNAME_H -std=gnu11 -o CMakeFiles/cmTC_2879f.dir/CurlTests.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c:144:8: error: too few arguments to function ‘gethostbyname_r’
+   rc = gethostbyname_r(address, &h, buffer, 8192, &h_errnop);
+        ^
+In file included from /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c:93:0:
+/usr/include/netdb.h:179:12: note: declared here
+ extern int gethostbyname_r (const char *__restrict __name,
+            ^
+CMakeFiles/cmTC_2879f.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_2879f.dir/CurlTests.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_2879f.dir/CurlTests.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_2879f/fast' failed
+make: *** [cmTC_2879f/fast] Error 2
+
+
+Performing Curl Test HAVE_GETHOSTBYNAME_R_3_REENTRANT failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_f847d/fast && make  -f CMakeFiles/cmTC_f847d.dir/build.make CMakeFiles/cmTC_f847d.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_f847d.dir/CurlTests.c.o
+/usr/bin/gcc   -w -DHAVE_GETHOSTBYNAME_R_3_REENTRANT  -DHAVE_STDIO_H -DHAVE_INTTYPES_H -DHAVE_SYS_IOCTL_H -DHAVE_SYS_PARAM_H -DHAVE_SYS_POLL_H -DHAVE_SYS_RESOURCE_H -DHAVE_SYS_SELECT_H -DHAVE_SYS_SOCKET_H -DHAVE_SYS_STAT_H -DHAVE_SYS_TIME_H -DHAVE_SYS_TYPES_H -DHAVE_SYS_UIO_H -DHAVE_SYS_UN_H -DHAVE_SYS_XATTR_H -DHAVE_ALLOCA_H -DHAVE_ARPA_INET_H -DHAVE_ARPA_TFTP_H -DHAVE_ASSERT_H -DHAVE_ERR_H -DHAVE_ERRNO_H -DHAVE_FCNTL_H -DHAVE_IFADDRS_H -DHAVE_LIBGEN_H -DHAVE_LOCALE_H -DHAVE_NET_IF_H -DHAVE_NETDB_H -DHAVE_NETINET_IN_H -DHAVE_NETINET_TCP_H -DHAVE_POLL_H -DHAVE_PWD_H -DHAVE_SETJMP_H -DHAVE_SGTTY_H -DHAVE_SIGNAL_H -DHAVE_STDBOOL_H -DHAVE_STDINT_H -DHAVE_STDIO_H -DHAVE_STDLIB_H -DHAVE_STRING_H -DHAVE_STRINGS_H -DHAVE_STROPTS_H -DHAVE_TERMIO_H -DHAVE_TERMIOS_H -DHAVE_TIME_H -DHAVE_UNISTD_H -DHAVE_UTIME_H -DHAVE_STDDEF_H -DHAVE_DLFCN_H -DHAVE_MALLOC_H -DHAVE_MEMORY_H -DHAVE_NETINET_IF_ETHER_H -DHAVE_STDINT_H -DHAVE_SYS_UTSNAME_H -std=gnu11 -o CMakeFiles/cmTC_f847d.dir/CurlTests.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c:106:23: error: storage size of ‘hdata’ isn’t known
+   struct hostent_data hdata;
+                       ^
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c:141:8: error: too few arguments to function ‘gethostbyname_r’
+   rc = gethostbyname_r(address, &h, &hdata);
+        ^
+In file included from /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c:93:0:
+/usr/include/netdb.h:179:12: note: declared here
+ extern int gethostbyname_r (const char *__restrict __name,
+            ^
+CMakeFiles/cmTC_f847d.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_f847d.dir/CurlTests.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_f847d.dir/CurlTests.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_f847d/fast' failed
+make: *** [cmTC_f847d/fast] Error 2
+
+
+Performing Curl Test HAVE_GETHOSTBYNAME_R_5_REENTRANT failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_95ef7/fast && make  -f CMakeFiles/cmTC_95ef7.dir/build.make CMakeFiles/cmTC_95ef7.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_95ef7.dir/CurlTests.c.o
+/usr/bin/gcc   -w -DHAVE_GETHOSTBYNAME_R_5_REENTRANT  -DHAVE_STDIO_H -DHAVE_INTTYPES_H -DHAVE_SYS_IOCTL_H -DHAVE_SYS_PARAM_H -DHAVE_SYS_POLL_H -DHAVE_SYS_RESOURCE_H -DHAVE_SYS_SELECT_H -DHAVE_SYS_SOCKET_H -DHAVE_SYS_STAT_H -DHAVE_SYS_TIME_H -DHAVE_SYS_TYPES_H -DHAVE_SYS_UIO_H -DHAVE_SYS_UN_H -DHAVE_SYS_XATTR_H -DHAVE_ALLOCA_H -DHAVE_ARPA_INET_H -DHAVE_ARPA_TFTP_H -DHAVE_ASSERT_H -DHAVE_ERR_H -DHAVE_ERRNO_H -DHAVE_FCNTL_H -DHAVE_IFADDRS_H -DHAVE_LIBGEN_H -DHAVE_LOCALE_H -DHAVE_NET_IF_H -DHAVE_NETDB_H -DHAVE_NETINET_IN_H -DHAVE_NETINET_TCP_H -DHAVE_POLL_H -DHAVE_PWD_H -DHAVE_SETJMP_H -DHAVE_SGTTY_H -DHAVE_SIGNAL_H -DHAVE_STDBOOL_H -DHAVE_STDINT_H -DHAVE_STDIO_H -DHAVE_STDLIB_H -DHAVE_STRING_H -DHAVE_STRINGS_H -DHAVE_STROPTS_H -DHAVE_TERMIO_H -DHAVE_TERMIOS_H -DHAVE_TIME_H -DHAVE_UNISTD_H -DHAVE_UTIME_H -DHAVE_STDDEF_H -DHAVE_DLFCN_H -DHAVE_MALLOC_H -DHAVE_MEMORY_H -DHAVE_NETINET_IF_ETHER_H -DHAVE_STDINT_H -DHAVE_SYS_UTSNAME_H -std=gnu11 -o CMakeFiles/cmTC_95ef7.dir/CurlTests.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c:144:8: error: too few arguments to function ‘gethostbyname_r’
+   rc = gethostbyname_r(address, &h, buffer, 8192, &h_errnop);
+        ^
+In file included from /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c:93:0:
+/usr/include/netdb.h:179:12: note: declared here
+ extern int gethostbyname_r (const char *__restrict __name,
+            ^
+CMakeFiles/cmTC_95ef7.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_95ef7.dir/CurlTests.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_95ef7.dir/CurlTests.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_95ef7/fast' failed
+make: *** [cmTC_95ef7/fast] Error 2
+
+
+Performing Curl Test HAVE_INET_NTOA_R_DECL failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_38e4e/fast && make  -f CMakeFiles/cmTC_38e4e.dir/build.make CMakeFiles/cmTC_38e4e.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_38e4e.dir/CurlTests.c.o
+/usr/bin/gcc   -w -DHAVE_INET_NTOA_R_DECL  -DHAVE_STDIO_H -DHAVE_INTTYPES_H -DHAVE_SYS_IOCTL_H -DHAVE_SYS_PARAM_H -DHAVE_SYS_POLL_H -DHAVE_SYS_RESOURCE_H -DHAVE_SYS_SELECT_H -DHAVE_SYS_SOCKET_H -DHAVE_SYS_STAT_H -DHAVE_SYS_TIME_H -DHAVE_SYS_TYPES_H -DHAVE_SYS_UIO_H -DHAVE_SYS_UN_H -DHAVE_SYS_XATTR_H -DHAVE_ALLOCA_H -DHAVE_ARPA_INET_H -DHAVE_ARPA_TFTP_H -DHAVE_ASSERT_H -DHAVE_ERR_H -DHAVE_ERRNO_H -DHAVE_FCNTL_H -DHAVE_IFADDRS_H -DHAVE_LIBGEN_H -DHAVE_LOCALE_H -DHAVE_NET_IF_H -DHAVE_NETDB_H -DHAVE_NETINET_IN_H -DHAVE_NETINET_TCP_H -DHAVE_POLL_H -DHAVE_PWD_H -DHAVE_SETJMP_H -DHAVE_SGTTY_H -DHAVE_SIGNAL_H -DHAVE_STDBOOL_H -DHAVE_STDINT_H -DHAVE_STDIO_H -DHAVE_STDLIB_H -DHAVE_STRING_H -DHAVE_STRINGS_H -DHAVE_STROPTS_H -DHAVE_TERMIO_H -DHAVE_TERMIOS_H -DHAVE_TIME_H -DHAVE_UNISTD_H -DHAVE_UTIME_H -DHAVE_STDDEF_H -DHAVE_DLFCN_H -DHAVE_MALLOC_H -DHAVE_MEMORY_H -DHAVE_NETINET_IF_ETHER_H -DHAVE_STDINT_H -DHAVE_SYS_UTSNAME_H -std=gnu11 -o CMakeFiles/cmTC_38e4e.dir/CurlTests.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c:226:21: error: ‘inet_ntoa_r’ undeclared (first use in this function)
+   func = (func_type)inet_ntoa_r;
+                     ^
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c:226:21: note: each undeclared identifier is reported only once for each function it appears in
+CMakeFiles/cmTC_38e4e.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_38e4e.dir/CurlTests.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_38e4e.dir/CurlTests.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_38e4e/fast' failed
+make: *** [cmTC_38e4e/fast] Error 2
+
+
+Performing Curl Test HAVE_INET_NTOA_R_DECL_REENTRANT failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_6b23d/fast && make  -f CMakeFiles/cmTC_6b23d.dir/build.make CMakeFiles/cmTC_6b23d.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_6b23d.dir/CurlTests.c.o
+/usr/bin/gcc   -w -DHAVE_INET_NTOA_R_DECL_REENTRANT  -DHAVE_STDIO_H -DHAVE_INTTYPES_H -DHAVE_SYS_IOCTL_H -DHAVE_SYS_PARAM_H -DHAVE_SYS_POLL_H -DHAVE_SYS_RESOURCE_H -DHAVE_SYS_SELECT_H -DHAVE_SYS_SOCKET_H -DHAVE_SYS_STAT_H -DHAVE_SYS_TIME_H -DHAVE_SYS_TYPES_H -DHAVE_SYS_UIO_H -DHAVE_SYS_UN_H -DHAVE_SYS_XATTR_H -DHAVE_ALLOCA_H -DHAVE_ARPA_INET_H -DHAVE_ARPA_TFTP_H -DHAVE_ASSERT_H -DHAVE_ERR_H -DHAVE_ERRNO_H -DHAVE_FCNTL_H -DHAVE_IFADDRS_H -DHAVE_LIBGEN_H -DHAVE_LOCALE_H -DHAVE_NET_IF_H -DHAVE_NETDB_H -DHAVE_NETINET_IN_H -DHAVE_NETINET_TCP_H -DHAVE_POLL_H -DHAVE_PWD_H -DHAVE_SETJMP_H -DHAVE_SGTTY_H -DHAVE_SIGNAL_H -DHAVE_STDBOOL_H -DHAVE_STDINT_H -DHAVE_STDIO_H -DHAVE_STDLIB_H -DHAVE_STRING_H -DHAVE_STRINGS_H -DHAVE_STROPTS_H -DHAVE_TERMIO_H -DHAVE_TERMIOS_H -DHAVE_TIME_H -DHAVE_UNISTD_H -DHAVE_UTIME_H -DHAVE_STDDEF_H -DHAVE_DLFCN_H -DHAVE_MALLOC_H -DHAVE_MEMORY_H -DHAVE_NETINET_IF_ETHER_H -DHAVE_STDINT_H -DHAVE_SYS_UTSNAME_H -std=gnu11 -o CMakeFiles/cmTC_6b23d.dir/CurlTests.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c:242:22: error: ‘inet_ntoa_r’ undeclared (first use in this function)
+   func = (func_type)&inet_ntoa_r;
+                      ^
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c:242:22: note: each undeclared identifier is reported only once for each function it appears in
+CMakeFiles/cmTC_6b23d.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_6b23d.dir/CurlTests.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_6b23d.dir/CurlTests.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_6b23d/fast' failed
+make: *** [cmTC_6b23d/fast] Error 2
+
+
+Performing Curl Test HAVE_GLIBC_STRERROR_R failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_c45f2/fast && make  -f CMakeFiles/cmTC_c45f2.dir/build.make CMakeFiles/cmTC_c45f2.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_c45f2.dir/CurlTests.c.o
+/usr/bin/gcc   -w -DHAVE_GLIBC_STRERROR_R  -DHAVE_STDIO_H -DHAVE_INTTYPES_H -DHAVE_SYS_IOCTL_H -DHAVE_SYS_PARAM_H -DHAVE_SYS_POLL_H -DHAVE_SYS_RESOURCE_H -DHAVE_SYS_SELECT_H -DHAVE_SYS_SOCKET_H -DHAVE_SYS_STAT_H -DHAVE_SYS_TIME_H -DHAVE_SYS_TYPES_H -DHAVE_SYS_UIO_H -DHAVE_SYS_UN_H -DHAVE_SYS_XATTR_H -DHAVE_ALLOCA_H -DHAVE_ARPA_INET_H -DHAVE_ARPA_TFTP_H -DHAVE_ASSERT_H -DHAVE_ERR_H -DHAVE_ERRNO_H -DHAVE_FCNTL_H -DHAVE_IFADDRS_H -DHAVE_LIBGEN_H -DHAVE_LOCALE_H -DHAVE_NET_IF_H -DHAVE_NETDB_H -DHAVE_NETINET_IN_H -DHAVE_NETINET_TCP_H -DHAVE_POLL_H -DHAVE_PWD_H -DHAVE_SETJMP_H -DHAVE_SGTTY_H -DHAVE_SIGNAL_H -DHAVE_STDBOOL_H -DHAVE_STDINT_H -DHAVE_STDIO_H -DHAVE_STDLIB_H -DHAVE_STRING_H -DHAVE_STRINGS_H -DHAVE_STROPTS_H -DHAVE_TERMIO_H -DHAVE_TERMIOS_H -DHAVE_TIME_H -DHAVE_UNISTD_H -DHAVE_UTIME_H -DHAVE_STDDEF_H -DHAVE_DLFCN_H -DHAVE_MALLOC_H -DHAVE_MEMORY_H -DHAVE_NETINET_IF_ETHER_H -DHAVE_STDINT_H -DHAVE_SYS_UTSNAME_H -std=gnu11 -o CMakeFiles/cmTC_c45f2.dir/CurlTests.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c:503:51: error: subscripted value is neither array nor pointer nor vector
+   check(strerror_r(EACCES, buffer, sizeof(buffer))[0]);
+                                                   ^
+CMakeFiles/cmTC_c45f2.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_c45f2.dir/CurlTests.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_c45f2.dir/CurlTests.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_c45f2/fast' failed
+make: *** [cmTC_c45f2/fast] Error 2
+
+
+Performing Curl Test HAVE_BUILTIN_AVAILABLE failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_cffaf/fast && make  -f CMakeFiles/cmTC_cffaf.dir/build.make CMakeFiles/cmTC_cffaf.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_cffaf.dir/CurlTests.c.o
+/usr/bin/gcc   -w -DHAVE_BUILTIN_AVAILABLE  -DHAVE_STDIO_H -DHAVE_INTTYPES_H -DHAVE_SYS_IOCTL_H -DHAVE_SYS_PARAM_H -DHAVE_SYS_POLL_H -DHAVE_SYS_RESOURCE_H -DHAVE_SYS_SELECT_H -DHAVE_SYS_SOCKET_H -DHAVE_SYS_STAT_H -DHAVE_SYS_TIME_H -DHAVE_SYS_TYPES_H -DHAVE_SYS_UIO_H -DHAVE_SYS_UN_H -DHAVE_SYS_XATTR_H -DHAVE_ALLOCA_H -DHAVE_ARPA_INET_H -DHAVE_ARPA_TFTP_H -DHAVE_ASSERT_H -DHAVE_ERR_H -DHAVE_ERRNO_H -DHAVE_FCNTL_H -DHAVE_IFADDRS_H -DHAVE_LIBGEN_H -DHAVE_LOCALE_H -DHAVE_NET_IF_H -DHAVE_NETDB_H -DHAVE_NETINET_IN_H -DHAVE_NETINET_TCP_H -DHAVE_POLL_H -DHAVE_PWD_H -DHAVE_SETJMP_H -DHAVE_SGTTY_H -DHAVE_SIGNAL_H -DHAVE_STDBOOL_H -DHAVE_STDINT_H -DHAVE_STDIO_H -DHAVE_STDLIB_H -DHAVE_STRING_H -DHAVE_STRINGS_H -DHAVE_STROPTS_H -DHAVE_TERMIO_H -DHAVE_TERMIOS_H -DHAVE_TIME_H -DHAVE_UNISTD_H -DHAVE_UTIME_H -DHAVE_STDDEF_H -DHAVE_DLFCN_H -DHAVE_MALLOC_H -DHAVE_MEMORY_H -DHAVE_NETINET_IF_ETHER_H -DHAVE_STDINT_H -DHAVE_SYS_UTSNAME_H -std=gnu11 -o CMakeFiles/cmTC_cffaf.dir/CurlTests.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c:550:26: error: ‘macOS’ undeclared (first use in this function)
+   if(__builtin_available(macOS 10.12, *)) {}
+                          ^
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c:550:26: note: each undeclared identifier is reported only once for each function it appears in
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Utilities/cmcurl/CMake/CurlTests.c:550:32: error: expected ‘)’ before numeric constant
+   if(__builtin_available(macOS 10.12, *)) {}
+                                ^
+CMakeFiles/cmTC_cffaf.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_cffaf.dir/CurlTests.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_cffaf.dir/CurlTests.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_cffaf/fast' failed
+make: *** [cmTC_cffaf/fast] Error 2
+
+
+Determining if the getrandom exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_bd783/fast && make  -f CMakeFiles/cmTC_bd783.dir/build.make CMakeFiles/cmTC_bd783.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_bd783.dir/CheckSymbolExists.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_bd783.dir/CheckSymbolExists.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:2:24: fatal error: sys/random.h: No such file or directory
+compilation terminated.
+CMakeFiles/cmTC_bd783.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_bd783.dir/CheckSymbolExists.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_bd783.dir/CheckSymbolExists.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_bd783/fast' failed
+make: *** [cmTC_bd783/fast] Error 2
+
+
+File /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <sys/random.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef getrandom
+  return ((int*)(&getrandom))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the arc4random_buf exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_6e02c/fast && make  -f CMakeFiles/cmTC_6e02c.dir/build.make CMakeFiles/cmTC_6e02c.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_6e02c.dir/CheckSymbolExists.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_6e02c.dir/CheckSymbolExists.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:19: error: ‘arc4random_buf’ undeclared (first use in this function)
+   return ((int*)(&arc4random_buf))[argc];
+                   ^
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:19: note: each undeclared identifier is reported only once for each function it appears in
+CMakeFiles/cmTC_6e02c.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_6e02c.dir/CheckSymbolExists.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_6e02c.dir/CheckSymbolExists.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_6e02c/fast' failed
+make: *** [cmTC_6e02c/fast] Error 2
+
+
+File /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdlib.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef arc4random_buf
+  return ((int*)(&arc4random_buf))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the arc4random exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_31c4b/fast && make  -f CMakeFiles/cmTC_31c4b.dir/build.make CMakeFiles/cmTC_31c4b.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_31c4b.dir/CheckSymbolExists.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_31c4b.dir/CheckSymbolExists.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:19: error: ‘arc4random’ undeclared (first use in this function)
+   return ((int*)(&arc4random))[argc];
+                   ^
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:19: note: each undeclared identifier is reported only once for each function it appears in
+CMakeFiles/cmTC_31c4b.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_31c4b.dir/CheckSymbolExists.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_31c4b.dir/CheckSymbolExists.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_31c4b/fast' failed
+make: *** [cmTC_31c4b/fast] Error 2
+
+
+File /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdlib.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef arc4random
+  return ((int*)(&arc4random))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if files sys/types.h;ctype.h;copyfile.h exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_00ef4/fast && make  -f CMakeFiles/cmTC_00ef4.dir/build.make CMakeFiles/cmTC_00ef4.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_00ef4.dir/HAVE_COPYFILE_H.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_00ef4.dir/HAVE_COPYFILE_H.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_COPYFILE_H.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_COPYFILE_H.c:4:22: fatal error: copyfile.h: No such file or directory
+compilation terminated.
+CMakeFiles/cmTC_00ef4.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_00ef4.dir/HAVE_COPYFILE_H.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_00ef4.dir/HAVE_COPYFILE_H.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_00ef4/fast' failed
+make: *** [cmTC_00ef4/fast] Error 2
+
+
+Source:
+/* */
+#include <sys/types.h>
+#include <ctype.h>
+#include <copyfile.h>
+
+
+int main(void){return 0;}
+
+Determining if files sys/types.h;ctype.h;direct.h exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_e9265/fast && make  -f CMakeFiles/cmTC_e9265.dir/build.make CMakeFiles/cmTC_e9265.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_e9265.dir/HAVE_DIRECT_H.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_e9265.dir/HAVE_DIRECT_H.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_DIRECT_H.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_DIRECT_H.c:4:20: fatal error: direct.h: No such file or directory
+compilation terminated.
+CMakeFiles/cmTC_e9265.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_e9265.dir/HAVE_DIRECT_H.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_e9265.dir/HAVE_DIRECT_H.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_e9265/fast' failed
+make: *** [cmTC_e9265/fast] Error 2
+
+
+Source:
+/* */
+#include <sys/types.h>
+#include <ctype.h>
+#include <direct.h>
+
+
+int main(void){return 0;}
+
+Determining if files sys/types.h;ctype.h;dlfcn.h;errno.h;ext2fs/ext2_fs.h exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_37a9e/fast && make  -f CMakeFiles/cmTC_37a9e.dir/build.make CMakeFiles/cmTC_37a9e.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_37a9e.dir/HAVE_EXT2FS_EXT2_FS_H.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_37a9e.dir/HAVE_EXT2FS_EXT2_FS_H.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_EXT2FS_EXT2_FS_H.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_EXT2FS_EXT2_FS_H.c:6:28: fatal error: ext2fs/ext2_fs.h: No such file or directory
+compilation terminated.
+CMakeFiles/cmTC_37a9e.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_37a9e.dir/HAVE_EXT2FS_EXT2_FS_H.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_37a9e.dir/HAVE_EXT2FS_EXT2_FS_H.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_37a9e/fast' failed
+make: *** [cmTC_37a9e/fast] Error 2
+
+
+Source:
+/* */
+#include <sys/types.h>
+#include <ctype.h>
+#include <dlfcn.h>
+#include <errno.h>
+#include <ext2fs/ext2_fs.h>
+
+
+int main(void){return 0;}
+
+Performing C SOURCE FILE Test HAVE_WORKING_EXT2_IOC_GETFLAGS failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_d4a47/fast && make  -f CMakeFiles/cmTC_d4a47.dir/build.make CMakeFiles/cmTC_d4a47.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_d4a47.dir/src.c.o
+/usr/bin/gcc -DHAVE_WORKING_EXT2_IOC_GETFLAGS  -w  -std=gnu11 -o CMakeFiles/cmTC_d4a47.dir/src.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c:2:28: fatal error: ext2fs/ext2_fs.h: No such file or directory
+compilation terminated.
+CMakeFiles/cmTC_d4a47.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_d4a47.dir/src.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_d4a47.dir/src.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_d4a47/fast' failed
+make: *** [cmTC_d4a47/fast] Error 2
+
+
+Source file was:
+#include <sys/ioctl.h>
+#include <ext2fs/ext2_fs.h>
+int main(void) { return EXT2_IOC_GETFLAGS; }
+Determining if files sys/types.h;ctype.h;dlfcn.h;errno.h;fcntl.h;grp.h;langinfo.h;limits.h;linux/types.h;linux/fiemap.h;linux/fs.h;linux/magic.h;locale.h;membership.h exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_ee8ba/fast && make  -f CMakeFiles/cmTC_ee8ba.dir/build.make CMakeFiles/cmTC_ee8ba.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_ee8ba.dir/HAVE_MEMBERSHIP_H.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_ee8ba.dir/HAVE_MEMBERSHIP_H.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_MEMBERSHIP_H.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_MEMBERSHIP_H.c:15:24: fatal error: membership.h: No such file or directory
+compilation terminated.
+CMakeFiles/cmTC_ee8ba.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_ee8ba.dir/HAVE_MEMBERSHIP_H.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_ee8ba.dir/HAVE_MEMBERSHIP_H.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_ee8ba/fast' failed
+make: *** [cmTC_ee8ba/fast] Error 2
+
+
+Source:
+/* */
+#include <sys/types.h>
+#include <ctype.h>
+#include <dlfcn.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <grp.h>
+#include <langinfo.h>
+#include <limits.h>
+#include <linux/types.h>
+#include <linux/fiemap.h>
+#include <linux/fs.h>
+#include <linux/magic.h>
+#include <locale.h>
+#include <membership.h>
+
+
+int main(void){return 0;}
+
+Determining if files sys/types.h;ctype.h;dlfcn.h;errno.h;fcntl.h;grp.h;langinfo.h;limits.h;linux/types.h;linux/fiemap.h;linux/fs.h;linux/magic.h;locale.h;memory.h;paths.h;poll.h;pthread.h;pwd.h;readpassphrase.h exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_bc422/fast && make  -f CMakeFiles/cmTC_bc422.dir/build.make CMakeFiles/cmTC_bc422.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_bc422.dir/HAVE_READPASSPHRASE_H.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_bc422.dir/HAVE_READPASSPHRASE_H.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_READPASSPHRASE_H.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_READPASSPHRASE_H.c:20:28: fatal error: readpassphrase.h: No such file or directory
+compilation terminated.
+CMakeFiles/cmTC_bc422.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_bc422.dir/HAVE_READPASSPHRASE_H.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_bc422.dir/HAVE_READPASSPHRASE_H.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_bc422/fast' failed
+make: *** [cmTC_bc422/fast] Error 2
+
+
+Source:
+/* */
+#include <sys/types.h>
+#include <ctype.h>
+#include <dlfcn.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <grp.h>
+#include <langinfo.h>
+#include <limits.h>
+#include <linux/types.h>
+#include <linux/fiemap.h>
+#include <linux/fs.h>
+#include <linux/magic.h>
+#include <locale.h>
+#include <memory.h>
+#include <paths.h>
+#include <poll.h>
+#include <pthread.h>
+#include <pwd.h>
+#include <readpassphrase.h>
+
+
+int main(void){return 0;}
+
+Determining if files sys/types.h;ctype.h;dlfcn.h;errno.h;fcntl.h;grp.h;langinfo.h;limits.h;linux/types.h;linux/fiemap.h;linux/fs.h;linux/magic.h;locale.h;memory.h;paths.h;poll.h;pthread.h;pwd.h;regex.h;signal.h;spawn.h;stdarg.h;stdlib.h;string.h;strings.h;sys/acl.h exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_b126c/fast && make  -f CMakeFiles/cmTC_b126c.dir/build.make CMakeFiles/cmTC_b126c.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_b126c.dir/HAVE_SYS_ACL_H.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_b126c.dir/HAVE_SYS_ACL_H.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_SYS_ACL_H.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_SYS_ACL_H.c:27:21: fatal error: sys/acl.h: No such file or directory
+compilation terminated.
+CMakeFiles/cmTC_b126c.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_b126c.dir/HAVE_SYS_ACL_H.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_b126c.dir/HAVE_SYS_ACL_H.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_b126c/fast' failed
+make: *** [cmTC_b126c/fast] Error 2
+
+
+Source:
+/* */
+#include <sys/types.h>
+#include <ctype.h>
+#include <dlfcn.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <grp.h>
+#include <langinfo.h>
+#include <limits.h>
+#include <linux/types.h>
+#include <linux/fiemap.h>
+#include <linux/fs.h>
+#include <linux/magic.h>
+#include <locale.h>
+#include <memory.h>
+#include <paths.h>
+#include <poll.h>
+#include <pthread.h>
+#include <pwd.h>
+#include <regex.h>
+#include <signal.h>
+#include <spawn.h>
+#include <stdarg.h>
+#include <stdlib.h>
+#include <string.h>
+#include <strings.h>
+#include <sys/acl.h>
+
+
+int main(void){return 0;}
+
+Determining if files sys/types.h;ctype.h;dlfcn.h;errno.h;fcntl.h;grp.h;langinfo.h;limits.h;linux/types.h;linux/fiemap.h;linux/fs.h;linux/magic.h;locale.h;memory.h;paths.h;poll.h;pthread.h;pwd.h;regex.h;signal.h;spawn.h;stdarg.h;stdlib.h;string.h;strings.h;sys/cdefs.h;sys/extattr.h exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_93572/fast && make  -f CMakeFiles/cmTC_93572.dir/build.make CMakeFiles/cmTC_93572.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_93572.dir/HAVE_SYS_EXTATTR_H.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_93572.dir/HAVE_SYS_EXTATTR_H.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_SYS_EXTATTR_H.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_SYS_EXTATTR_H.c:28:25: fatal error: sys/extattr.h: No such file or directory
+compilation terminated.
+CMakeFiles/cmTC_93572.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_93572.dir/HAVE_SYS_EXTATTR_H.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_93572.dir/HAVE_SYS_EXTATTR_H.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_93572/fast' failed
+make: *** [cmTC_93572/fast] Error 2
+
+
+Source:
+/* */
+#include <sys/types.h>
+#include <ctype.h>
+#include <dlfcn.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <grp.h>
+#include <langinfo.h>
+#include <limits.h>
+#include <linux/types.h>
+#include <linux/fiemap.h>
+#include <linux/fs.h>
+#include <linux/magic.h>
+#include <locale.h>
+#include <memory.h>
+#include <paths.h>
+#include <poll.h>
+#include <pthread.h>
+#include <pwd.h>
+#include <regex.h>
+#include <signal.h>
+#include <spawn.h>
+#include <stdarg.h>
+#include <stdlib.h>
+#include <string.h>
+#include <strings.h>
+#include <sys/cdefs.h>
+#include <sys/extattr.h>
+
+
+int main(void){return 0;}
+
+Determining if files sys/types.h;ctype.h;dlfcn.h;errno.h;fcntl.h;grp.h;langinfo.h;limits.h;linux/types.h;linux/fiemap.h;linux/fs.h;linux/magic.h;locale.h;memory.h;paths.h;poll.h;pthread.h;pwd.h;regex.h;signal.h;spawn.h;stdarg.h;stdlib.h;string.h;strings.h;sys/cdefs.h;sys/ioctl.h;sys/mkdev.h exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_1006d/fast && make  -f CMakeFiles/cmTC_1006d.dir/build.make CMakeFiles/cmTC_1006d.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_1006d.dir/HAVE_SYS_MKDEV_H.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_1006d.dir/HAVE_SYS_MKDEV_H.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_SYS_MKDEV_H.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_SYS_MKDEV_H.c:29:23: fatal error: sys/mkdev.h: No such file or directory
+compilation terminated.
+CMakeFiles/cmTC_1006d.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_1006d.dir/HAVE_SYS_MKDEV_H.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_1006d.dir/HAVE_SYS_MKDEV_H.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_1006d/fast' failed
+make: *** [cmTC_1006d/fast] Error 2
+
+
+Source:
+/* */
+#include <sys/types.h>
+#include <ctype.h>
+#include <dlfcn.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <grp.h>
+#include <langinfo.h>
+#include <limits.h>
+#include <linux/types.h>
+#include <linux/fiemap.h>
+#include <linux/fs.h>
+#include <linux/magic.h>
+#include <locale.h>
+#include <memory.h>
+#include <paths.h>
+#include <poll.h>
+#include <pthread.h>
+#include <pwd.h>
+#include <regex.h>
+#include <signal.h>
+#include <spawn.h>
+#include <stdarg.h>
+#include <stdlib.h>
+#include <string.h>
+#include <strings.h>
+#include <sys/cdefs.h>
+#include <sys/ioctl.h>
+#include <sys/mkdev.h>
+
+
+int main(void){return 0;}
+
+Determining if files sys/types.h;ctype.h;dlfcn.h;errno.h;fcntl.h;grp.h;langinfo.h;limits.h;linux/types.h;linux/fiemap.h;linux/fs.h;linux/magic.h;locale.h;memory.h;paths.h;poll.h;pthread.h;pwd.h;regex.h;signal.h;spawn.h;stdarg.h;stdlib.h;string.h;strings.h;sys/cdefs.h;sys/ioctl.h;sys/mount.h exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_30f93/fast && make  -f CMakeFiles/cmTC_30f93.dir/build.make CMakeFiles/cmTC_30f93.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_30f93.dir/HAVE_SYS_MOUNT_H.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_30f93.dir/HAVE_SYS_MOUNT_H.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_SYS_MOUNT_H.c
+In file included from /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_SYS_MOUNT_H.c:12:0:
+/usr/include/x86_64-linux-gnu/sys/mount.h:35:3: error: expected identifier before numeric constant
+   MS_RDONLY = 1,  /* Mount read-only.  */
+   ^
+CMakeFiles/cmTC_30f93.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_30f93.dir/HAVE_SYS_MOUNT_H.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_30f93.dir/HAVE_SYS_MOUNT_H.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_30f93/fast' failed
+make: *** [cmTC_30f93/fast] Error 2
+
+
+Source:
+/* */
+#include <sys/types.h>
+#include <ctype.h>
+#include <dlfcn.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <grp.h>
+#include <langinfo.h>
+#include <limits.h>
+#include <linux/types.h>
+#include <linux/fiemap.h>
+#include <linux/fs.h>
+#include <linux/magic.h>
+#include <locale.h>
+#include <memory.h>
+#include <paths.h>
+#include <poll.h>
+#include <pthread.h>
+#include <pwd.h>
+#include <regex.h>
+#include <signal.h>
+#include <spawn.h>
+#include <stdarg.h>
+#include <stdlib.h>
+#include <string.h>
+#include <strings.h>
+#include <sys/cdefs.h>
+#include <sys/ioctl.h>
+#include <sys/mount.h>
+
+
+int main(void){return 0;}
+
+Determining if files sys/types.h;ctype.h;dlfcn.h;errno.h;fcntl.h;grp.h;langinfo.h;limits.h;linux/types.h;linux/fiemap.h;linux/fs.h;linux/magic.h;locale.h;memory.h;paths.h;poll.h;pthread.h;pwd.h;regex.h;signal.h;spawn.h;stdarg.h;stdlib.h;string.h;strings.h;sys/cdefs.h;sys/ioctl.h;sys/param.h;sys/poll.h;sys/richacl.h exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_44d24/fast && make  -f CMakeFiles/cmTC_44d24.dir/build.make CMakeFiles/cmTC_44d24.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_44d24.dir/HAVE_SYS_RICHACL_H.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_44d24.dir/HAVE_SYS_RICHACL_H.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_SYS_RICHACL_H.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_SYS_RICHACL_H.c:31:25: fatal error: sys/richacl.h: No such file or directory
+compilation terminated.
+CMakeFiles/cmTC_44d24.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_44d24.dir/HAVE_SYS_RICHACL_H.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_44d24.dir/HAVE_SYS_RICHACL_H.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_44d24/fast' failed
+make: *** [cmTC_44d24/fast] Error 2
+
+
+Source:
+/* */
+#include <sys/types.h>
+#include <ctype.h>
+#include <dlfcn.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <grp.h>
+#include <langinfo.h>
+#include <limits.h>
+#include <linux/types.h>
+#include <linux/fiemap.h>
+#include <linux/fs.h>
+#include <linux/magic.h>
+#include <locale.h>
+#include <memory.h>
+#include <paths.h>
+#include <poll.h>
+#include <pthread.h>
+#include <pwd.h>
+#include <regex.h>
+#include <signal.h>
+#include <spawn.h>
+#include <stdarg.h>
+#include <stdlib.h>
+#include <string.h>
+#include <strings.h>
+#include <sys/cdefs.h>
+#include <sys/ioctl.h>
+#include <sys/param.h>
+#include <sys/poll.h>
+#include <sys/richacl.h>
+
+
+int main(void){return 0;}
+
+Determining if files sys/types.h;ctype.h;dlfcn.h;errno.h;fcntl.h;grp.h;langinfo.h;limits.h;linux/types.h;linux/fiemap.h;linux/fs.h;linux/magic.h;locale.h;memory.h;paths.h;poll.h;pthread.h;pwd.h;regex.h;signal.h;spawn.h;stdarg.h;stdlib.h;string.h;strings.h;sys/cdefs.h;sys/ioctl.h;sys/param.h;sys/poll.h;sys/select.h;sys/stat.h;sys/statfs.h;sys/statvfs.h;sys/sysmacros.h;sys/time.h;sys/utsname.h;sys/vfs.h;sys/wait.h;sys/xattr.h;time.h;unistd.h;utime.h;wchar.h;wctype.h;windows.h exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_f421d/fast && make  -f CMakeFiles/cmTC_f421d.dir/build.make CMakeFiles/cmTC_f421d.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_f421d.dir/HAVE_WINDOWS_H.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_f421d.dir/HAVE_WINDOWS_H.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_WINDOWS_H.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_WINDOWS_H.c:46:21: fatal error: windows.h: No such file or directory
+compilation terminated.
+CMakeFiles/cmTC_f421d.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_f421d.dir/HAVE_WINDOWS_H.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_f421d.dir/HAVE_WINDOWS_H.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_f421d/fast' failed
+make: *** [cmTC_f421d/fast] Error 2
+
+
+Source:
+/* */
+#include <sys/types.h>
+#include <ctype.h>
+#include <dlfcn.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <grp.h>
+#include <langinfo.h>
+#include <limits.h>
+#include <linux/types.h>
+#include <linux/fiemap.h>
+#include <linux/fs.h>
+#include <linux/magic.h>
+#include <locale.h>
+#include <memory.h>
+#include <paths.h>
+#include <poll.h>
+#include <pthread.h>
+#include <pwd.h>
+#include <regex.h>
+#include <signal.h>
+#include <spawn.h>
+#include <stdarg.h>
+#include <stdlib.h>
+#include <string.h>
+#include <strings.h>
+#include <sys/cdefs.h>
+#include <sys/ioctl.h>
+#include <sys/param.h>
+#include <sys/poll.h>
+#include <sys/select.h>
+#include <sys/stat.h>
+#include <sys/statfs.h>
+#include <sys/statvfs.h>
+#include <sys/sysmacros.h>
+#include <sys/time.h>
+#include <sys/utsname.h>
+#include <sys/vfs.h>
+#include <sys/wait.h>
+#include <sys/xattr.h>
+#include <time.h>
+#include <unistd.h>
+#include <utime.h>
+#include <wchar.h>
+#include <wctype.h>
+#include <windows.h>
+
+
+int main(void){return 0;}
+
+Determining if files sys/types.h;ctype.h;dlfcn.h;errno.h;fcntl.h;grp.h;langinfo.h;limits.h;linux/types.h;linux/fiemap.h;linux/fs.h;linux/magic.h;locale.h;memory.h;paths.h;poll.h;pthread.h;pwd.h;regex.h;signal.h;spawn.h;stdarg.h;stdlib.h;string.h;strings.h;sys/cdefs.h;sys/ioctl.h;sys/param.h;sys/poll.h;sys/select.h;sys/stat.h;sys/statfs.h;sys/statvfs.h;sys/sysmacros.h;sys/time.h;sys/utsname.h;sys/vfs.h;sys/wait.h;sys/xattr.h;time.h;unistd.h;utime.h;wchar.h;wctype.h;wincrypt.h exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_a2529/fast && make  -f CMakeFiles/cmTC_a2529.dir/build.make CMakeFiles/cmTC_a2529.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_a2529.dir/HAVE_WINCRYPT_H.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_a2529.dir/HAVE_WINCRYPT_H.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_WINCRYPT_H.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_WINCRYPT_H.c:46:22: fatal error: wincrypt.h: No such file or directory
+compilation terminated.
+CMakeFiles/cmTC_a2529.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_a2529.dir/HAVE_WINCRYPT_H.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_a2529.dir/HAVE_WINCRYPT_H.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_a2529/fast' failed
+make: *** [cmTC_a2529/fast] Error 2
+
+
+Source:
+/* */
+#include <sys/types.h>
+#include <ctype.h>
+#include <dlfcn.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <grp.h>
+#include <langinfo.h>
+#include <limits.h>
+#include <linux/types.h>
+#include <linux/fiemap.h>
+#include <linux/fs.h>
+#include <linux/magic.h>
+#include <locale.h>
+#include <memory.h>
+#include <paths.h>
+#include <poll.h>
+#include <pthread.h>
+#include <pwd.h>
+#include <regex.h>
+#include <signal.h>
+#include <spawn.h>
+#include <stdarg.h>
+#include <stdlib.h>
+#include <string.h>
+#include <strings.h>
+#include <sys/cdefs.h>
+#include <sys/ioctl.h>
+#include <sys/param.h>
+#include <sys/poll.h>
+#include <sys/select.h>
+#include <sys/stat.h>
+#include <sys/statfs.h>
+#include <sys/statvfs.h>
+#include <sys/sysmacros.h>
+#include <sys/time.h>
+#include <sys/utsname.h>
+#include <sys/vfs.h>
+#include <sys/wait.h>
+#include <sys/xattr.h>
+#include <time.h>
+#include <unistd.h>
+#include <utime.h>
+#include <wchar.h>
+#include <wctype.h>
+#include <wincrypt.h>
+
+
+int main(void){return 0;}
+
+Determining if files sys/types.h;ctype.h;dlfcn.h;errno.h;fcntl.h;grp.h;langinfo.h;limits.h;linux/types.h;linux/fiemap.h;linux/fs.h;linux/magic.h;locale.h;memory.h;paths.h;poll.h;pthread.h;pwd.h;regex.h;signal.h;spawn.h;stdarg.h;stdlib.h;string.h;strings.h;sys/cdefs.h;sys/ioctl.h;sys/param.h;sys/poll.h;sys/select.h;sys/stat.h;sys/statfs.h;sys/statvfs.h;sys/sysmacros.h;sys/time.h;sys/utsname.h;sys/vfs.h;sys/wait.h;sys/xattr.h;time.h;unistd.h;utime.h;wchar.h;wctype.h;winioctl.h exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_6d587/fast && make  -f CMakeFiles/cmTC_6d587.dir/build.make CMakeFiles/cmTC_6d587.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_6d587.dir/HAVE_WINIOCTL_H.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_6d587.dir/HAVE_WINIOCTL_H.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_WINIOCTL_H.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CheckIncludeFiles/HAVE_WINIOCTL_H.c:46:22: fatal error: winioctl.h: No such file or directory
+compilation terminated.
+CMakeFiles/cmTC_6d587.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_6d587.dir/HAVE_WINIOCTL_H.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_6d587.dir/HAVE_WINIOCTL_H.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_6d587/fast' failed
+make: *** [cmTC_6d587/fast] Error 2
+
+
+Source:
+/* */
+#include <sys/types.h>
+#include <ctype.h>
+#include <dlfcn.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <grp.h>
+#include <langinfo.h>
+#include <limits.h>
+#include <linux/types.h>
+#include <linux/fiemap.h>
+#include <linux/fs.h>
+#include <linux/magic.h>
+#include <locale.h>
+#include <memory.h>
+#include <paths.h>
+#include <poll.h>
+#include <pthread.h>
+#include <pwd.h>
+#include <regex.h>
+#include <signal.h>
+#include <spawn.h>
+#include <stdarg.h>
+#include <stdlib.h>
+#include <string.h>
+#include <strings.h>
+#include <sys/cdefs.h>
+#include <sys/ioctl.h>
+#include <sys/param.h>
+#include <sys/poll.h>
+#include <sys/select.h>
+#include <sys/stat.h>
+#include <sys/statfs.h>
+#include <sys/statvfs.h>
+#include <sys/sysmacros.h>
+#include <sys/time.h>
+#include <sys/utsname.h>
+#include <sys/vfs.h>
+#include <sys/wait.h>
+#include <sys/xattr.h>
+#include <time.h>
+#include <unistd.h>
+#include <utime.h>
+#include <wchar.h>
+#include <wctype.h>
+#include <winioctl.h>
+
+
+int main(void){return 0;}
+
+Determining if the function getvfsbyname exists failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_a1be2/fast && make  -f CMakeFiles/cmTC_a1be2.dir/build.make CMakeFiles/cmTC_a1be2.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_a1be2.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -w -DCHECK_FUNCTION_EXISTS=getvfsbyname  -fno-builtin -std=gnu11 -o CMakeFiles/cmTC_a1be2.dir/CheckFunctionExists.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Modules/CheckFunctionExists.c
+Linking C executable cmTC_a1be2
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Bootstrap.cmk/cmake -E cmake_link_script CMakeFiles/cmTC_a1be2.dir/link.txt --verbose=1
+/usr/bin/gcc  -w -DCHECK_FUNCTION_EXISTS=getvfsbyname  -fno-builtin CMakeFiles/cmTC_a1be2.dir/CheckFunctionExists.c.o -o cmTC_a1be2 
+CMakeFiles/cmTC_a1be2.dir/CheckFunctionExists.c.o: In function `main':
+CheckFunctionExists.c:(.text+0x10): undefined reference to `getvfsbyname'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_a1be2.dir/build.make:98: recipe for target 'cmTC_a1be2' failed
+make[1]: *** [cmTC_a1be2] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_a1be2/fast' failed
+make: *** [cmTC_a1be2/fast] Error 2
+
+
+
+Determining if the function lchflags exists failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_adcd1/fast && make  -f CMakeFiles/cmTC_adcd1.dir/build.make CMakeFiles/cmTC_adcd1.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_adcd1.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -w -DCHECK_FUNCTION_EXISTS=lchflags  -fno-builtin -std=gnu11 -o CMakeFiles/cmTC_adcd1.dir/CheckFunctionExists.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Modules/CheckFunctionExists.c
+Linking C executable cmTC_adcd1
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Bootstrap.cmk/cmake -E cmake_link_script CMakeFiles/cmTC_adcd1.dir/link.txt --verbose=1
+/usr/bin/gcc  -w -DCHECK_FUNCTION_EXISTS=lchflags  -fno-builtin CMakeFiles/cmTC_adcd1.dir/CheckFunctionExists.c.o -o cmTC_adcd1 
+CMakeFiles/cmTC_adcd1.dir/CheckFunctionExists.c.o: In function `main':
+CheckFunctionExists.c:(.text+0x10): undefined reference to `lchflags'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_adcd1.dir/build.make:98: recipe for target 'cmTC_adcd1' failed
+make[1]: *** [cmTC_adcd1] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_adcd1/fast' failed
+make: *** [cmTC_adcd1/fast] Error 2
+
+
+
+Determining if the function readpassphrase exists failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_d59c5/fast && make  -f CMakeFiles/cmTC_d59c5.dir/build.make CMakeFiles/cmTC_d59c5.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_d59c5.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -w -DCHECK_FUNCTION_EXISTS=readpassphrase  -fno-builtin -std=gnu11 -o CMakeFiles/cmTC_d59c5.dir/CheckFunctionExists.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Modules/CheckFunctionExists.c
+Linking C executable cmTC_d59c5
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Bootstrap.cmk/cmake -E cmake_link_script CMakeFiles/cmTC_d59c5.dir/link.txt --verbose=1
+/usr/bin/gcc  -w -DCHECK_FUNCTION_EXISTS=readpassphrase  -fno-builtin CMakeFiles/cmTC_d59c5.dir/CheckFunctionExists.c.o -o cmTC_d59c5 
+CMakeFiles/cmTC_d59c5.dir/CheckFunctionExists.c.o: In function `main':
+CheckFunctionExists.c:(.text+0x10): undefined reference to `readpassphrase'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_d59c5.dir/build.make:98: recipe for target 'cmTC_d59c5' failed
+make[1]: *** [cmTC_d59c5] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_d59c5/fast' failed
+make: *** [cmTC_d59c5/fast] Error 2
+
+
+
+Determining if the function strncpy_s exists failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_1e7b6/fast && make  -f CMakeFiles/cmTC_1e7b6.dir/build.make CMakeFiles/cmTC_1e7b6.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_1e7b6.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -w -DCHECK_FUNCTION_EXISTS=strncpy_s  -fno-builtin -std=gnu11 -o CMakeFiles/cmTC_1e7b6.dir/CheckFunctionExists.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Modules/CheckFunctionExists.c
+Linking C executable cmTC_1e7b6
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Bootstrap.cmk/cmake -E cmake_link_script CMakeFiles/cmTC_1e7b6.dir/link.txt --verbose=1
+/usr/bin/gcc  -w -DCHECK_FUNCTION_EXISTS=strncpy_s  -fno-builtin CMakeFiles/cmTC_1e7b6.dir/CheckFunctionExists.c.o -o cmTC_1e7b6 
+CMakeFiles/cmTC_1e7b6.dir/CheckFunctionExists.c.o: In function `main':
+CheckFunctionExists.c:(.text+0x10): undefined reference to `strncpy_s'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_1e7b6.dir/build.make:98: recipe for target 'cmTC_1e7b6' failed
+make[1]: *** [cmTC_1e7b6] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_1e7b6/fast' failed
+make: *** [cmTC_1e7b6/fast] Error 2
+
+
+
+Determining if the function _ctime64_s exists failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_0f3e5/fast && make  -f CMakeFiles/cmTC_0f3e5.dir/build.make CMakeFiles/cmTC_0f3e5.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_0f3e5.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -w -DCHECK_FUNCTION_EXISTS=_ctime64_s  -fno-builtin -std=gnu11 -o CMakeFiles/cmTC_0f3e5.dir/CheckFunctionExists.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Modules/CheckFunctionExists.c
+Linking C executable cmTC_0f3e5
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Bootstrap.cmk/cmake -E cmake_link_script CMakeFiles/cmTC_0f3e5.dir/link.txt --verbose=1
+/usr/bin/gcc  -w -DCHECK_FUNCTION_EXISTS=_ctime64_s  -fno-builtin CMakeFiles/cmTC_0f3e5.dir/CheckFunctionExists.c.o -o cmTC_0f3e5 
+CMakeFiles/cmTC_0f3e5.dir/CheckFunctionExists.c.o: In function `main':
+CheckFunctionExists.c:(.text+0x10): undefined reference to `_ctime64_s'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_0f3e5.dir/build.make:98: recipe for target 'cmTC_0f3e5' failed
+make[1]: *** [cmTC_0f3e5] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_0f3e5/fast' failed
+make: *** [cmTC_0f3e5/fast] Error 2
+
+
+
+Determining if the function _fseeki64 exists failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_3bdf5/fast && make  -f CMakeFiles/cmTC_3bdf5.dir/build.make CMakeFiles/cmTC_3bdf5.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_3bdf5.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -w -DCHECK_FUNCTION_EXISTS=_fseeki64  -fno-builtin -std=gnu11 -o CMakeFiles/cmTC_3bdf5.dir/CheckFunctionExists.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Modules/CheckFunctionExists.c
+Linking C executable cmTC_3bdf5
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Bootstrap.cmk/cmake -E cmake_link_script CMakeFiles/cmTC_3bdf5.dir/link.txt --verbose=1
+/usr/bin/gcc  -w -DCHECK_FUNCTION_EXISTS=_fseeki64  -fno-builtin CMakeFiles/cmTC_3bdf5.dir/CheckFunctionExists.c.o -o cmTC_3bdf5 
+CMakeFiles/cmTC_3bdf5.dir/CheckFunctionExists.c.o: In function `main':
+CheckFunctionExists.c:(.text+0x10): undefined reference to `_fseeki64'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_3bdf5.dir/build.make:98: recipe for target 'cmTC_3bdf5' failed
+make[1]: *** [cmTC_3bdf5] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_3bdf5/fast' failed
+make: *** [cmTC_3bdf5/fast] Error 2
+
+
+
+Determining if the function _get_timezone exists failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_1719c/fast && make  -f CMakeFiles/cmTC_1719c.dir/build.make CMakeFiles/cmTC_1719c.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_1719c.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -w -DCHECK_FUNCTION_EXISTS=_get_timezone  -fno-builtin -std=gnu11 -o CMakeFiles/cmTC_1719c.dir/CheckFunctionExists.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Modules/CheckFunctionExists.c
+Linking C executable cmTC_1719c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Bootstrap.cmk/cmake -E cmake_link_script CMakeFiles/cmTC_1719c.dir/link.txt --verbose=1
+/usr/bin/gcc  -w -DCHECK_FUNCTION_EXISTS=_get_timezone  -fno-builtin CMakeFiles/cmTC_1719c.dir/CheckFunctionExists.c.o -o cmTC_1719c 
+CMakeFiles/cmTC_1719c.dir/CheckFunctionExists.c.o: In function `main':
+CheckFunctionExists.c:(.text+0x10): undefined reference to `_get_timezone'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_1719c.dir/build.make:98: recipe for target 'cmTC_1719c' failed
+make[1]: *** [cmTC_1719c] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_1719c/fast' failed
+make: *** [cmTC_1719c/fast] Error 2
+
+
+
+Determining if the function _gmtime64_s exists failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_bf4e6/fast && make  -f CMakeFiles/cmTC_bf4e6.dir/build.make CMakeFiles/cmTC_bf4e6.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_bf4e6.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -w -DCHECK_FUNCTION_EXISTS=_gmtime64_s  -fno-builtin -std=gnu11 -o CMakeFiles/cmTC_bf4e6.dir/CheckFunctionExists.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Modules/CheckFunctionExists.c
+Linking C executable cmTC_bf4e6
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Bootstrap.cmk/cmake -E cmake_link_script CMakeFiles/cmTC_bf4e6.dir/link.txt --verbose=1
+/usr/bin/gcc  -w -DCHECK_FUNCTION_EXISTS=_gmtime64_s  -fno-builtin CMakeFiles/cmTC_bf4e6.dir/CheckFunctionExists.c.o -o cmTC_bf4e6 
+CMakeFiles/cmTC_bf4e6.dir/CheckFunctionExists.c.o: In function `main':
+CheckFunctionExists.c:(.text+0x10): undefined reference to `_gmtime64_s'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_bf4e6.dir/build.make:98: recipe for target 'cmTC_bf4e6' failed
+make[1]: *** [cmTC_bf4e6] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_bf4e6/fast' failed
+make: *** [cmTC_bf4e6/fast] Error 2
+
+
+
+Determining if the function _localtime64_s exists failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_272ee/fast && make  -f CMakeFiles/cmTC_272ee.dir/build.make CMakeFiles/cmTC_272ee.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_272ee.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -w -DCHECK_FUNCTION_EXISTS=_localtime64_s  -fno-builtin -std=gnu11 -o CMakeFiles/cmTC_272ee.dir/CheckFunctionExists.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Modules/CheckFunctionExists.c
+Linking C executable cmTC_272ee
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Bootstrap.cmk/cmake -E cmake_link_script CMakeFiles/cmTC_272ee.dir/link.txt --verbose=1
+/usr/bin/gcc  -w -DCHECK_FUNCTION_EXISTS=_localtime64_s  -fno-builtin CMakeFiles/cmTC_272ee.dir/CheckFunctionExists.c.o -o cmTC_272ee 
+CMakeFiles/cmTC_272ee.dir/CheckFunctionExists.c.o: In function `main':
+CheckFunctionExists.c:(.text+0x10): undefined reference to `_localtime64_s'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_272ee.dir/build.make:98: recipe for target 'cmTC_272ee' failed
+make[1]: *** [cmTC_272ee] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_272ee/fast' failed
+make: *** [cmTC_272ee/fast] Error 2
+
+
+
+Determining if the function _mkgmtime64 exists failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_bd647/fast && make  -f CMakeFiles/cmTC_bd647.dir/build.make CMakeFiles/cmTC_bd647.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_bd647.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -w -DCHECK_FUNCTION_EXISTS=_mkgmtime64  -fno-builtin -std=gnu11 -o CMakeFiles/cmTC_bd647.dir/CheckFunctionExists.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Modules/CheckFunctionExists.c
+Linking C executable cmTC_bd647
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Bootstrap.cmk/cmake -E cmake_link_script CMakeFiles/cmTC_bd647.dir/link.txt --verbose=1
+/usr/bin/gcc  -w -DCHECK_FUNCTION_EXISTS=_mkgmtime64  -fno-builtin CMakeFiles/cmTC_bd647.dir/CheckFunctionExists.c.o -o cmTC_bd647 
+CMakeFiles/cmTC_bd647.dir/CheckFunctionExists.c.o: In function `main':
+CheckFunctionExists.c:(.text+0x10): undefined reference to `_mkgmtime64'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_bd647.dir/build.make:98: recipe for target 'cmTC_bd647' failed
+make[1]: *** [cmTC_bd647] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_bd647/fast' failed
+make: *** [cmTC_bd647/fast] Error 2
+
+
+
+Determining if the function cygwin_conv_path exists failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_a9b11/fast && make  -f CMakeFiles/cmTC_a9b11.dir/build.make CMakeFiles/cmTC_a9b11.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_a9b11.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -w -DCHECK_FUNCTION_EXISTS=cygwin_conv_path  -fno-builtin -std=gnu11 -o CMakeFiles/cmTC_a9b11.dir/CheckFunctionExists.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Modules/CheckFunctionExists.c
+Linking C executable cmTC_a9b11
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Bootstrap.cmk/cmake -E cmake_link_script CMakeFiles/cmTC_a9b11.dir/link.txt --verbose=1
+/usr/bin/gcc  -w -DCHECK_FUNCTION_EXISTS=cygwin_conv_path  -fno-builtin CMakeFiles/cmTC_a9b11.dir/CheckFunctionExists.c.o -o cmTC_a9b11 
+CMakeFiles/cmTC_a9b11.dir/CheckFunctionExists.c.o: In function `main':
+CheckFunctionExists.c:(.text+0x10): undefined reference to `cygwin_conv_path'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_a9b11.dir/build.make:98: recipe for target 'cmTC_a9b11' failed
+make[1]: *** [cmTC_a9b11] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_a9b11/fast' failed
+make: *** [cmTC_a9b11/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test HAVE_STRUCT_VFSCONF failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_97841/fast && make  -f CMakeFiles/cmTC_97841.dir/build.make CMakeFiles/cmTC_97841.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_97841.dir/src.c.o
+/usr/bin/gcc -DHAVE_STRUCT_VFSCONF  -w  -std=gnu11 -o CMakeFiles/cmTC_97841.dir/src.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c:3:33: error: storage size of ‘v’ isn’t known
+ int main(void) { struct vfsconf v; return sizeof(v);}
+                                 ^
+CMakeFiles/cmTC_97841.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_97841.dir/src.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_97841.dir/src.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_97841/fast' failed
+make: *** [cmTC_97841/fast] Error 2
+
+
+Source file was:
+#include <sys/types.h>
+#include <sys/mount.h>
+int main(void) { struct vfsconf v; return sizeof(v);}
+Performing C SOURCE FILE Test HAVE_STRUCT_XVFSCONF failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_e38ad/fast && make  -f CMakeFiles/cmTC_e38ad.dir/build.make CMakeFiles/cmTC_e38ad.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_e38ad.dir/src.c.o
+/usr/bin/gcc -DHAVE_STRUCT_XVFSCONF  -w  -std=gnu11 -o CMakeFiles/cmTC_e38ad.dir/src.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c:3:34: error: storage size of ‘v’ isn’t known
+ int main(void) { struct xvfsconf v; return sizeof(v);}
+                                  ^
+CMakeFiles/cmTC_e38ad.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_e38ad.dir/src.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_e38ad.dir/src.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_e38ad/fast' failed
+make: *** [cmTC_e38ad/fast] Error 2
+
+
+Source file was:
+#include <sys/types.h>
+#include <sys/mount.h>
+int main(void) { struct xvfsconf v; return sizeof(v);}
+Performing C SOURCE FILE Test MAJOR_IN_MKDEV failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_8f089/fast && make  -f CMakeFiles/cmTC_8f089.dir/build.make CMakeFiles/cmTC_8f089.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_8f089.dir/src.c.o
+/usr/bin/gcc -DMAJOR_IN_MKDEV  -w  -std=gnu11 -o CMakeFiles/cmTC_8f089.dir/src.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c:1:23: fatal error: sys/mkdev.h: No such file or directory
+compilation terminated.
+CMakeFiles/cmTC_8f089.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_8f089.dir/src.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_8f089.dir/src.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_8f089/fast' failed
+make: *** [cmTC_8f089/fast] Error 2
+
+
+Source file was:
+#include <sys/mkdev.h>
+int main() { return major(256); }
+Determining if the EFTYPE exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_63a0c/fast && make  -f CMakeFiles/cmTC_63a0c.dir/build.make CMakeFiles/cmTC_63a0c.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_63a0c.dir/CheckSymbolExists.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_63a0c.dir/CheckSymbolExists.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:19: error: ‘EFTYPE’ undeclared (first use in this function)
+   return ((int*)(&EFTYPE))[argc];
+                   ^
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:19: note: each undeclared identifier is reported only once for each function it appears in
+CMakeFiles/cmTC_63a0c.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_63a0c.dir/CheckSymbolExists.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_63a0c.dir/CheckSymbolExists.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_63a0c/fast' failed
+make: *** [cmTC_63a0c/fast] Error 2
+
+
+File /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <errno.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef EFTYPE
+  return ((int*)(&EFTYPE))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the D_MD_ORDER exist failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_559e8/fast && make  -f CMakeFiles/cmTC_559e8.dir/build.make CMakeFiles/cmTC_559e8.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_559e8.dir/CheckSymbolExists.c.o
+/usr/bin/gcc   -w  -std=gnu11 -o CMakeFiles/cmTC_559e8.dir/CheckSymbolExists.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:19: error: ‘D_MD_ORDER’ undeclared (first use in this function)
+   return ((int*)(&D_MD_ORDER))[argc];
+                   ^
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:19: note: each undeclared identifier is reported only once for each function it appears in
+CMakeFiles/cmTC_559e8.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_559e8.dir/CheckSymbolExists.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_559e8.dir/CheckSymbolExists.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_559e8/fast' failed
+make: *** [cmTC_559e8/fast] Error 2
+
+
+File /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <langinfo.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef D_MD_ORDER
+  return ((int*)(&D_MD_ORDER))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Performing C SOURCE FILE Test HAVE_STRUCT_TM___TM_GMTOFF failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_3cf1b/fast && make  -f CMakeFiles/cmTC_3cf1b.dir/build.make CMakeFiles/cmTC_3cf1b.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_3cf1b.dir/src.c.o
+/usr/bin/gcc -DHAVE_STRUCT_TM___TM_GMTOFF  -w  -std=gnu11 -o CMakeFiles/cmTC_3cf1b.dir/src.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c:6:32: error: ‘struct tm’ has no member named ‘__tm_gmtoff’
+   (void)sizeof(((struct tm *)0)->__tm_gmtoff);
+                                ^
+CMakeFiles/cmTC_3cf1b.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_3cf1b.dir/src.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_3cf1b.dir/src.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_3cf1b/fast' failed
+make: *** [cmTC_3cf1b/fast] Error 2
+
+
+Source file was:
+
+#include <time.h>
+
+int main()
+{
+  (void)sizeof(((struct tm *)0)->__tm_gmtoff);
+  return 0;
+}
+
+Performing C SOURCE FILE Test HAVE_STRUCT_STATFS_F_NAMEMAX failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_705f8/fast && make  -f CMakeFiles/cmTC_705f8.dir/build.make CMakeFiles/cmTC_705f8.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_705f8.dir/src.c.o
+/usr/bin/gcc -DHAVE_STRUCT_STATFS_F_NAMEMAX  -w  -std=gnu11 -o CMakeFiles/cmTC_705f8.dir/src.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c:7:36: error: dereferencing pointer to incomplete type ‘struct statfs’
+   (void)sizeof(((struct statfs *)0)->f_namemax);
+                                    ^
+CMakeFiles/cmTC_705f8.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_705f8.dir/src.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_705f8.dir/src.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_705f8/fast' failed
+make: *** [cmTC_705f8/fast] Error 2
+
+
+Source file was:
+
+#include <sys/param.h>
+#include <sys/mount.h>
+
+int main()
+{
+  (void)sizeof(((struct statfs *)0)->f_namemax);
+  return 0;
+}
+
+Performing C SOURCE FILE Test HAVE_STRUCT_STAT_ST_BIRTHTIME failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_87909/fast && make  -f CMakeFiles/cmTC_87909.dir/build.make CMakeFiles/cmTC_87909.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_87909.dir/src.c.o
+/usr/bin/gcc -DHAVE_STRUCT_STAT_ST_BIRTHTIME  -w  -std=gnu11 -o CMakeFiles/cmTC_87909.dir/src.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c:7:34: error: ‘struct stat’ has no member named ‘st_birthtime’
+   (void)sizeof(((struct stat *)0)->st_birthtime);
+                                  ^
+CMakeFiles/cmTC_87909.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_87909.dir/src.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_87909.dir/src.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_87909/fast' failed
+make: *** [cmTC_87909/fast] Error 2
+
+
+Source file was:
+
+#include <sys/types.h>
+#include <sys/stat.h>
+
+int main()
+{
+  (void)sizeof(((struct stat *)0)->st_birthtime);
+  return 0;
+}
+
+Performing C SOURCE FILE Test HAVE_STRUCT_STAT_ST_BIRTHTIMESPEC_TV_NSEC failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_39338/fast && make  -f CMakeFiles/cmTC_39338.dir/build.make CMakeFiles/cmTC_39338.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_39338.dir/src.c.o
+/usr/bin/gcc -DHAVE_STRUCT_STAT_ST_BIRTHTIMESPEC_TV_NSEC  -w  -std=gnu11 -o CMakeFiles/cmTC_39338.dir/src.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c:7:34: error: ‘struct stat’ has no member named ‘st_birthtimespec’
+   (void)sizeof(((struct stat *)0)->st_birthtimespec.tv_nsec);
+                                  ^
+CMakeFiles/cmTC_39338.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_39338.dir/src.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_39338.dir/src.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_39338/fast' failed
+make: *** [cmTC_39338/fast] Error 2
+
+
+Source file was:
+
+#include <sys/types.h>
+#include <sys/stat.h>
+
+int main()
+{
+  (void)sizeof(((struct stat *)0)->st_birthtimespec.tv_nsec);
+  return 0;
+}
+
+Performing C SOURCE FILE Test HAVE_STRUCT_STAT_ST_MTIMESPEC_TV_NSEC failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_a3433/fast && make  -f CMakeFiles/cmTC_a3433.dir/build.make CMakeFiles/cmTC_a3433.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_a3433.dir/src.c.o
+/usr/bin/gcc -DHAVE_STRUCT_STAT_ST_MTIMESPEC_TV_NSEC  -w  -std=gnu11 -o CMakeFiles/cmTC_a3433.dir/src.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c:7:34: error: ‘struct stat’ has no member named ‘st_mtimespec’
+   (void)sizeof(((struct stat *)0)->st_mtimespec.tv_nsec);
+                                  ^
+CMakeFiles/cmTC_a3433.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_a3433.dir/src.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_a3433.dir/src.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_a3433/fast' failed
+make: *** [cmTC_a3433/fast] Error 2
+
+
+Source file was:
+
+#include <sys/types.h>
+#include <sys/stat.h>
+
+int main()
+{
+  (void)sizeof(((struct stat *)0)->st_mtimespec.tv_nsec);
+  return 0;
+}
+
+Performing C SOURCE FILE Test HAVE_STRUCT_STAT_ST_MTIME_N failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_c302e/fast && make  -f CMakeFiles/cmTC_c302e.dir/build.make CMakeFiles/cmTC_c302e.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_c302e.dir/src.c.o
+/usr/bin/gcc -DHAVE_STRUCT_STAT_ST_MTIME_N  -w  -std=gnu11 -o CMakeFiles/cmTC_c302e.dir/src.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c:7:34: error: ‘struct stat’ has no member named ‘st_mtime_n’
+   (void)sizeof(((struct stat *)0)->st_mtime_n);
+                                  ^
+CMakeFiles/cmTC_c302e.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_c302e.dir/src.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_c302e.dir/src.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_c302e/fast' failed
+make: *** [cmTC_c302e/fast] Error 2
+
+
+Source file was:
+
+#include <sys/types.h>
+#include <sys/stat.h>
+
+int main()
+{
+  (void)sizeof(((struct stat *)0)->st_mtime_n);
+  return 0;
+}
+
+Performing C SOURCE FILE Test HAVE_STRUCT_STAT_ST_UMTIME failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_8c632/fast && make  -f CMakeFiles/cmTC_8c632.dir/build.make CMakeFiles/cmTC_8c632.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_8c632.dir/src.c.o
+/usr/bin/gcc -DHAVE_STRUCT_STAT_ST_UMTIME  -w  -std=gnu11 -o CMakeFiles/cmTC_8c632.dir/src.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c:7:34: error: ‘struct stat’ has no member named ‘st_umtime’
+   (void)sizeof(((struct stat *)0)->st_umtime);
+                                  ^
+CMakeFiles/cmTC_8c632.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_8c632.dir/src.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_8c632.dir/src.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_8c632/fast' failed
+make: *** [cmTC_8c632/fast] Error 2
+
+
+Source file was:
+
+#include <sys/types.h>
+#include <sys/stat.h>
+
+int main()
+{
+  (void)sizeof(((struct stat *)0)->st_umtime);
+  return 0;
+}
+
+Performing C SOURCE FILE Test HAVE_STRUCT_STAT_ST_MTIME_USEC failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_2702a/fast && make  -f CMakeFiles/cmTC_2702a.dir/build.make CMakeFiles/cmTC_2702a.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_2702a.dir/src.c.o
+/usr/bin/gcc -DHAVE_STRUCT_STAT_ST_MTIME_USEC  -w  -std=gnu11 -o CMakeFiles/cmTC_2702a.dir/src.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c:7:34: error: ‘struct stat’ has no member named ‘st_mtime_usec’
+   (void)sizeof(((struct stat *)0)->st_mtime_usec);
+                                  ^
+CMakeFiles/cmTC_2702a.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_2702a.dir/src.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_2702a.dir/src.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_2702a/fast' failed
+make: *** [cmTC_2702a/fast] Error 2
+
+
+Source file was:
+
+#include <sys/types.h>
+#include <sys/stat.h>
+
+int main()
+{
+  (void)sizeof(((struct stat *)0)->st_mtime_usec);
+  return 0;
+}
+
+Performing C SOURCE FILE Test HAVE_STRUCT_STAT_ST_FLAGS failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_28cae/fast && make  -f CMakeFiles/cmTC_28cae.dir/build.make CMakeFiles/cmTC_28cae.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_28cae.dir/src.c.o
+/usr/bin/gcc -DHAVE_STRUCT_STAT_ST_FLAGS  -w  -std=gnu11 -o CMakeFiles/cmTC_28cae.dir/src.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c:7:34: error: ‘struct stat’ has no member named ‘st_flags’
+   (void)sizeof(((struct stat *)0)->st_flags);
+                                  ^
+CMakeFiles/cmTC_28cae.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_28cae.dir/src.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_28cae.dir/src.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_28cae/fast' failed
+make: *** [cmTC_28cae/fast] Error 2
+
+
+Source file was:
+
+#include <sys/types.h>
+#include <sys/stat.h>
+
+int main()
+{
+  (void)sizeof(((struct stat *)0)->st_flags);
+  return 0;
+}
+
+Performing C SOURCE FILE Test HAVE_STRUCT_STATVFS_F_IOSIZE failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_80dff/fast && make  -f CMakeFiles/cmTC_80dff.dir/build.make CMakeFiles/cmTC_80dff.dir/build
+make[1]: Entering directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_80dff.dir/src.c.o
+/usr/bin/gcc -DHAVE_STRUCT_STATVFS_F_IOSIZE  -w  -std=gnu11 -o CMakeFiles/cmTC_80dff.dir/src.c.o -c /home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c: In function ‘main’:
+/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp/src.c:7:37: error: ‘struct statvfs’ has no member named ‘f_iosize’
+   (void)sizeof(((struct statvfs *)0)->f_iosize);
+                                     ^
+CMakeFiles/cmTC_80dff.dir/build.make:77: recipe for target 'CMakeFiles/cmTC_80dff.dir/src.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_80dff.dir/src.c.o] Error 1
+make[1]: Leaving directory '/home/cheezestick/workspace/torch-memory/cmake-3.21.2/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_80dff/fast' failed
+make: *** [cmTC_80dff/fast] Error 2
+
+
+Source file was:
+
+#include <sys/types.h>
+#include <sys/statvfs.h>
+
+int main()
+{
+  (void)sizeof(((struct statvfs *)0)->f_iosize);
+  return 0;
+}
+
+Checking for curses support failed with the following output:
+Change Dir: /home/cheezestick/workspace/torch-memory/cmake-3.21.2/Source/Checks/Curses-build
+
+Run Build Command(s):/usr/bin/make -f Makefile CheckCurses && make: *** No rule to make target 'CheckCurses'.  Stop.
+
+
+
+Looking for a Fortran compiler failed with the following output:
+-- The Fortran compiler identification is unknown
+CMake Error at CMakeLists.txt:2 (project):
+  No CMAKE_Fortran_COMPILER could be found.
+
+  Tell CMake where to find the compiler by setting either the environment
+  variable "FC" or the CMake cache entry CMAKE_Fortran_COMPILER to the full
+  path to the compiler, or to the compiler name if it is in the PATH.
+
+
+-- Configuring incomplete, errors occurred!
+See also "/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Tests/CMakeFiles/CheckFortran/CMakeFiles/CMakeOutput.log".
+See also "/home/cheezestick/workspace/torch-memory/cmake-3.21.2/Tests/CMakeFiles/CheckFortran/CMakeFiles/CMakeError.log".
+
