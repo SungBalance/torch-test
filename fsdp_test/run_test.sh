@@ -1,4 +1,4 @@
-export GPU_NUM=3
+export GPU_NUM=0
 
 export GPUS_PER_NODE=1
 export MASTER_ADDR=localhost

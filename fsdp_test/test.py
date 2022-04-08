@@ -63,15 +63,36 @@ if __name__ == '__main__':
     print("\n\nwith saved_tensor to CPU")
     with torch.autograd.graph.save_on_cpu(pin_memory=True):
         do_experiment(model)
-    
 
-    model_fsdp = FullyShardedDataParallel(
-        model,
-        cpu_offload=CPUOffload(offload_params=True)
-    )
 
-    print("\n\nwith FSDP")
-    try:
-        do_experiment(model_fsdp)
+    # Test for Big Model
+    print("\n\n\n\n\n\n===========TEST FOR BIG MODEL===========")
+
+    from .models.beyond_the_spectrum.model import BeyondtheSpectrumModel
+    from .models.beyond_the_spectrum.options import Options
+    model = BeyondtheSpectrumModel(opt=Options('pixel'))
+    print("\n\nbaseline")
+
+    try:     
+        do_experiment(model)
     except:
         print("FAILED")
+
+    print("\n\nwith saved_tensor to CPU")
+
+    try:     
+        with torch.autograd.graph.save_on_cpu(pin_memory=True):
+            do_experiment(model)
+    except:
+        print("FAILED")
+
+    # model_fsdp = FullyShardedDataParallel(
+    #     model,
+    #     cpu_offload=CPUOffload(offload_params=True)
+    # )
+
+    # print("\n\nwith FSDP")
+    # try:
+    #     do_experiment(model_fsdp)
+    # except:
+    #     print("FAILED")
